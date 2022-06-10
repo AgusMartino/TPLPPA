@@ -7,17 +7,30 @@ using System.Web.Http;
 using System.Web.Http.Results;
 using Newtonsoft.Json;
 using TP_LPPA.Utils;
+using TP_LPPA.Models.LPPA;
 
 namespace TP_LPPA.Controllers
 {
     public class TesteoController : ApiController
     {
+        #region Singleton
+        private readonly static TesteoController _instance;
+        public static TesteoController Current { get { return _instance; } }
+        static TesteoController() { _instance = new TesteoController(); }
+        private TesteoController()
+        {
+            //Implent here the initialization of your singleton
+        }
+        #endregion
+
+        Random random = new Random();
+
         [HttpGet]
         public IHttpActionResult Get()
         {
             try
             {
-                return Ok(new Persona() { Nombre = "Pablo", Edad = 30 });
+                return Ok(new Persona() { Nombre = "Pablo", Edad = random.Next(18,60) });
             }
             catch (Exception ex)
             {
