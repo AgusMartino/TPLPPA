@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web.Http;
 using System.Net;
 using System.Net.Http.Headers;
-using TP_LPPA.Attributes;
 
 namespace TP_LPPA
 {

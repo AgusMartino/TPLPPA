@@ -1,0 +1,92 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.Http.Results;
+using Newtonsoft.Json;
+using TP_LPPA.Utils;
+
+namespace TP_LPPA.Controllers
+{
+    public class TesteoController : ApiController
+    {
+        [HttpGet]
+        public IHttpActionResult Get()
+        {
+            try
+            {
+                return Ok(new Persona() { Nombre = "Pablo", Edad = 30 });
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            } 
+        }
+        [HttpGet]
+        public IHttpActionResult GetFiltered(string filtro)
+        {
+            try
+            {
+                var get = Get();
+                var result = get as OkNegotiatedContentResult<Persona>;
+                var persona = result.Content;
+                return Ok($"(filtrado por '{filtro}') {persona}");
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+        [HttpPost]
+        public IHttpActionResult Procesar(string a_procesar)
+        {
+            try
+            {
+                return Ok($"(procesado) {a_procesar}");
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpPost]
+        public IHttpActionResult Procesar2([FromBody] string a_procesar)
+        {
+            try
+            {
+                return Ok($"(procesado 2) {a_procesar}");
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpGet]
+        public IHttpActionResult GetFromDB()
+        {
+            try
+            {
+                return Ok(TesteoManager.Current.GetFromDB());
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        class Persona
+        {
+            public string Nombre;
+            public int Edad;
+
+            public override string ToString()
+            {
+                return $"Nombre: {Nombre}, Edad: {Edad}";
+            }
+        }
+    }
+}
