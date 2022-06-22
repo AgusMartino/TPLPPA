@@ -23,7 +23,6 @@ export default{
 .container{
     justify-content: center;
     align-items: center;
-    
 }
 .col{
     justify-content: center;
