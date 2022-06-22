@@ -4,21 +4,20 @@
 </div>
 <div class="container">
     <div class="col">
-        <h3>Listado de usuarios existentes</h3>
+        <h3>Listado de privilegios existentes</h3>
         
-        <button type="button" class="btn btn-secondary">Registrar un nuevo usuario</button>
+        <button type="button" class="btn btn-secondary">Registrar un nuevo privilegio</button>
 
         <table class="table">
             <tr>
-                <th scope="col">Usuario</th>
-                <th scope="col">Email</th>
-                <th scope="col">Asignar permisos</th>
+                <th scope="col">#</th>
+                <th scope="col">Privilegio</th>
                 <th scope="col">Modificar</th>
                 <th scope="col">Eliminar</th>
             </tr>
-            <dataTable v-for="user in entradasJSON"
-                :Usuario="user.Usuario"
-                :Email="user.Email"
+            <dataTable v-for="privilegio in entradasJSON"
+                :id="privilegio.id"
+                :privilegio="privilegio.privilegio"
             />
         </table>
     </div>
@@ -27,7 +26,7 @@
 
 <script>
 import NAV from "./components/nav.vue"
-import dataTable from "./components/dataTableUser.vue"
+import dataTable from "./components/dataTablePrivilege.vue"
 export default{
     components:{
         NAV,
@@ -37,12 +36,12 @@ export default{
         return{
              entradasJSON: [
                 {
-                    Usuario: "Agustin",
-                    Email: "martinoagustin4@gmail.com"
+                    id: "1",
+                    privilegio: "Usuario"
                 },
                 {
-                    Usuario: "Eze",
-                    Email: "EzeAmorosino@gmail.com"
+                    id: "2",
+                    privilegio: "Permiso"
                 }
              ]
         }
