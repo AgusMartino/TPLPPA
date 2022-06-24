@@ -7,6 +7,7 @@ using TP_LPPA.Utils;
 
 namespace TP_LPPA.Controllers
 {
+    [Authorize]
     public class UserController : ApiController
     {
         #region Singleton
@@ -24,7 +25,7 @@ namespace TP_LPPA.Controllers
         /// </summary>
         /// <param name="login">Username y Password</param>
         /// <returns>Usuario y Token</returns>
-        [HttpGet]
+        [HttpPost]
         [AllowAnonymous]
         public IHttpActionResult Login([FromBody] LoginBody login)
         {
@@ -32,6 +33,21 @@ namespace TP_LPPA.Controllers
             {
                 var response = UserManager.Current.Login(login.username, login.password);
                 return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpDelete]
+        [AllowAnonymous]
+        public IHttpActionResult Logout([FromBody] Usuario user)
+        {
+            try
+            {
+                UserManager.Current.SignUp(user);
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -59,13 +75,13 @@ namespace TP_LPPA.Controllers
             }
         }
 
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="username">Username</param>
         /// <returns>Usuario</returns>
         [HttpGet]
-        [Authorize]
         public IHttpActionResult GetOne([FromBody] string username)
         {
             try
@@ -83,7 +99,6 @@ namespace TP_LPPA.Controllers
         /// </summary>
         /// <returns>Todos los usuarios</returns>
         [HttpGet]
-        [Authorize]
         public IHttpActionResult GetAll()
         {
             try
@@ -102,7 +117,6 @@ namespace TP_LPPA.Controllers
         /// <param name="user">Usuario</param>
         /// <returns></returns>
         [HttpPost]
-        [Authorize]
         public IHttpActionResult Add([FromBody] Usuario user)
         {
             try
@@ -122,7 +136,6 @@ namespace TP_LPPA.Controllers
         /// <param name="user">Usuario</param>
         /// <returns></returns>
         [HttpPut]
-        [Authorize]
         public IHttpActionResult Update([FromBody] Usuario user)
         {
             try
@@ -142,7 +155,6 @@ namespace TP_LPPA.Controllers
         /// <param name="username">Username</param>
         /// <returns></returns>
         [HttpDelete]
-        [Authorize]
         public IHttpActionResult Remove([FromBody] string username)
         {
             try //update estado 0
@@ -162,7 +174,6 @@ namespace TP_LPPA.Controllers
         /// <param name="username">Username</param>
         /// <returns>Permisos del usuario solicitado</returns>
         [HttpGet]
-        [Authorize]
         public IHttpActionResult GetPermissions([FromBody] string username)
         {
             try
@@ -181,7 +192,6 @@ namespace TP_LPPA.Controllers
         /// <param name="userdata">Username y permisos de un usuario</param>
         /// <returns></returns>
         [HttpGet]
-        [Authorize]
         public IHttpActionResult UpdatePermissions([FromBody] UserPermissionsBody userdata)
         {
             try

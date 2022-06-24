@@ -15,7 +15,7 @@ namespace TP_LPPA.Utils
         }
         #endregion
 
-        public (Usuario, Token) Login(string username, string password)
+        public (Usuario user, Token token) Login(string username, string password)
         {
             return (new Usuario(), new Token());
         }

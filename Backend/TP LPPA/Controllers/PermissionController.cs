@@ -5,6 +5,7 @@ using TP_LPPA.Utils;
 
 namespace TP_LPPA.Controllers
 {
+    [Authorize]
     public class PermissionController : ApiController
     {
         #region Singleton
@@ -23,7 +24,6 @@ namespace TP_LPPA.Controllers
         /// <param name="id"></param>
         /// <returns>Permiso</returns>
         [HttpGet]
-        [Authorize]
         public IHttpActionResult GetOne([FromBody] Guid id)
         {
             try
@@ -41,7 +41,6 @@ namespace TP_LPPA.Controllers
         /// </summary>
         /// <returns>Todos los permisos</returns>
         [HttpGet]
-        [Authorize]
         public IHttpActionResult GetAll()
         {
             try
@@ -60,7 +59,6 @@ namespace TP_LPPA.Controllers
         /// <param name="permission">Permiso</param>
         /// <returns></returns>
         [HttpPost]
-        [Authorize]
         public IHttpActionResult Add([FromBody] Permiso permission)
         {
             try
@@ -80,7 +78,6 @@ namespace TP_LPPA.Controllers
         /// <param name="permission">Permiso</param>
         /// <returns></returns>
         [HttpPut]
-        [Authorize]
         public IHttpActionResult Update([FromBody] Permiso permission)
         {
             try
@@ -100,7 +97,6 @@ namespace TP_LPPA.Controllers
         /// <param name="id">ID de permiso</param>
         /// <returns></returns>
         [HttpDelete]
-        [Authorize]
         public IHttpActionResult Remove([FromBody] Guid id)
         {
             try
