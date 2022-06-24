@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TP_LPPA.Models.LPPA;
 
 namespace TP_LPPA.Utils
@@ -15,9 +16,26 @@ namespace TP_LPPA.Utils
         }
         #endregion
 
+        public Permiso GetOne(Guid id)
+        {
+            return new Permiso();
+        }
+
         public List<Permiso> GetAll()
         {
             return new List<Permiso>();
+        }
+
+        public void Add(Permiso permission)
+        {
+        }
+
+        public void Update(Permiso permission)
+        {
+        }
+
+        public void Remove(Guid id)
+        {
         }
     }
 }

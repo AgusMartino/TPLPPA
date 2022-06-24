@@ -19,13 +19,19 @@ namespace TP_LPPA.Controllers
         }
         #endregion
 
+        /// <summary>
+        /// Si existe el usuario, se logea en el sistema generando un token.
+        /// </summary>
+        /// <param name="login">Username y Password</param>
+        /// <returns>Usuario y Token</returns>
         [HttpGet]
+        [AllowAnonymous]
         public IHttpActionResult Login([FromBody] LoginBody login)
         {
             try //Si retorna null, return NotFound()
             {
-                var user = UserManager.Current.Login(login.username, login.password);
-                return Ok(user);
+                var response = UserManager.Current.Login(login.username, login.password);
+                return Ok(response);
             }
             catch (Exception ex)
             {
@@ -33,7 +39,13 @@ namespace TP_LPPA.Controllers
             }
         }
 
+        /// <summary>
+        /// Se registra a un usuario en el sistema.
+        /// </summary>
+        /// <param name="user">Usuario</param>
+        /// <returns></returns>
         [HttpPost]
+        [AllowAnonymous]
         public IHttpActionResult SignUp([FromBody] Usuario user)
         {
             try
@@ -47,8 +59,14 @@ namespace TP_LPPA.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="username">Username</param>
+        /// <returns>Usuario</returns>
         [HttpGet]
-        public IHttpActionResult GetOne(string username)
+        [Authorize]
+        public IHttpActionResult GetOne([FromBody] string username)
         {
             try
             {
@@ -60,7 +78,12 @@ namespace TP_LPPA.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>Todos los usuarios</returns>
         [HttpGet]
+        [Authorize]
         public IHttpActionResult GetAll()
         {
             try
@@ -73,7 +96,13 @@ namespace TP_LPPA.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="user">Usuario</param>
+        /// <returns></returns>
         [HttpPost]
+        [Authorize]
         public IHttpActionResult Add([FromBody] Usuario user)
         {
             try
@@ -87,7 +116,13 @@ namespace TP_LPPA.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="user">Usuario</param>
+        /// <returns></returns>
         [HttpPut]
+        [Authorize]
         public IHttpActionResult Update([FromBody] Usuario user)
         {
             try
@@ -101,8 +136,14 @@ namespace TP_LPPA.Controllers
             }
         }
 
+        /// <summary>
+        /// Establece al usuario solicitado estado 0 (inactivo).
+        /// </summary>
+        /// <param name="username">Username</param>
+        /// <returns></returns>
         [HttpDelete]
-        public IHttpActionResult Remove(string username)
+        [Authorize]
+        public IHttpActionResult Remove([FromBody] string username)
         {
             try //update estado 0
             {
@@ -115,8 +156,14 @@ namespace TP_LPPA.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="username">Username</param>
+        /// <returns>Permisos del usuario solicitado</returns>
         [HttpGet]
-        public IHttpActionResult GetPermissions(string username)
+        [Authorize]
+        public IHttpActionResult GetPermissions([FromBody] string username)
         {
             try
             {
@@ -128,12 +175,18 @@ namespace TP_LPPA.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userdata">Username y permisos de un usuario</param>
+        /// <returns></returns>
         [HttpGet]
-        public IHttpActionResult UpdatePermissions(string username, [FromBody] List<Permiso> permissions)
+        [Authorize]
+        public IHttpActionResult UpdatePermissions([FromBody] UserPermissionsBody userdata)
         {
             try
             {
-                UserManager.Current.UpdatePermissions(username, permissions);
+                UserManager.Current.UpdatePermissions(userdata.Username, userdata.Permissions);
                 return Ok();
             }
             catch (Exception ex)

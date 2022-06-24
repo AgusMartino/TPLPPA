@@ -316,6 +316,8 @@
     <Compile Include="Controllers\TesteoController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Entities\LoginBody.cs" />
+    <Compile Include="Entities\LoginResponse.cs" />
+    <Compile Include="Entities\UserPermissionsBody.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
