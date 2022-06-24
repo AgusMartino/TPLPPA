@@ -53,6 +53,9 @@
             <input type="password" name="passwordCheck" id="passwordCheck">
         </label>
     </div>
+    <div class="row mt-3">
+        <button type="submit" class="btn btn-secondary">Registrar Usuario</button>
+    </div>
 </div>
 </template>
 
