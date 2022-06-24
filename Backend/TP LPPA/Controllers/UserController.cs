@@ -8,6 +8,7 @@ using System.Web.Http.Results;
 using Newtonsoft.Json;
 using TP_LPPA.Utils;
 using TP_LPPA.Models.LPPA;
+using TP_LPPA.Entities;
 
 namespace TP_LPPA.Controllers
 {
@@ -24,11 +25,12 @@ namespace TP_LPPA.Controllers
         #endregion
 
         [HttpGet]
-        public IHttpActionResult Login(string username, string password)
+        public IHttpActionResult Login([FromBody] LoginBody login)
         {
-            try
+            try //Si retorna null, return NotFound()
             {
-                return Ok(new Usuario());
+                var user = UserManager.Current.Login(login.username, login.password);
+                return Ok(user);
             }
             catch (Exception ex)
             {
@@ -41,6 +43,7 @@ namespace TP_LPPA.Controllers
         {
             try
             {
+                UserManager.Current.SignUp(user);
                 return Ok();
             }
             catch (Exception ex)
@@ -54,7 +57,7 @@ namespace TP_LPPA.Controllers
         {
             try
             {
-                return Ok(new Usuario());
+                return Ok(UserManager.Current.GetOne(username));
             }
             catch (Exception ex)
             {
@@ -67,7 +70,7 @@ namespace TP_LPPA.Controllers
         {
             try
             {
-                return Ok(new List<Usuario>());
+                return Ok(UserManager.Current.GetAll());
             }
             catch (Exception ex)
             {
@@ -80,6 +83,7 @@ namespace TP_LPPA.Controllers
         {
             try
             {
+                UserManager.Current.Add(user);
                 return Ok();
             }
             catch (Exception ex)
@@ -93,6 +97,7 @@ namespace TP_LPPA.Controllers
         {
             try
             {
+                UserManager.Current.Update(user);
                 return Ok();
             }
             catch (Exception ex)
@@ -104,8 +109,9 @@ namespace TP_LPPA.Controllers
         [HttpDelete]
         public IHttpActionResult Remove(string username)
         {
-            try
+            try //update estado 0
             {
+                UserManager.Current.Remove(username);
                 return Ok();
             }
             catch (Exception ex)
@@ -119,7 +125,7 @@ namespace TP_LPPA.Controllers
         {
             try
             {
-                return Ok(new List<Permiso>());
+                return Ok(UserManager.Current.GetPermissions(username));
             }
             catch (Exception ex)
             {
@@ -132,6 +138,7 @@ namespace TP_LPPA.Controllers
         {
             try
             {
+                UserManager.Current.UpdatePermissions(username, permissions);
                 return Ok();
             }
             catch (Exception ex)

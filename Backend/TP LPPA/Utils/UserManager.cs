@@ -20,51 +20,46 @@ namespace TP_LPPA.Utils
 
         public Usuario Login(string username, string password)
         {
-            throw new NotImplementedException();
             return new Usuario();
         }
 
         public void SignUp(Usuario user)
         {
-            throw new NotImplementedException();
         }
 
         public Usuario GetOne(string username)
         {
-            throw new NotImplementedException();
             return new Usuario();
         }
 
         public List<Usuario> GetAll()
         {
-            throw new NotImplementedException();
-            return new List<Usuario>();
+            return new List<Usuario>() 
+            { 
+                new Usuario(){ Nombre_Usuario = "Usuario 1"}, 
+                new Usuario()
+            };
         }
 
         public void Add(Usuario user)
         {
-            throw new NotImplementedException();
         }
 
         public void Update(Usuario user)
         {
-            throw new NotImplementedException();
         }
 
         public void Remove(string username)
         {
-            throw new NotImplementedException();
         }
 
         public List<Permiso> GetPermissions(string username)
         {
-            throw new NotImplementedException();
             return new List<Permiso>();
         }
 
         public void UpdatePermissions(string username, List<Permiso> permissions)
         {
-            throw new NotImplementedException();
         }
     }
 }

@@ -28,7 +28,7 @@ namespace TP_LPPA.Controllers
         {
             try
             {
-                return Ok(new List<Permiso>());
+                return Ok(PermissionManager.Current.GetAll());
             }
             catch (Exception ex)
             {
