@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.Results;
-using Newtonsoft.Json;
-using TP_LPPA.Utils;
-using TP_LPPA.Models.LPPA;
 using TP_LPPA.Entities;
+using TP_LPPA.Models.LPPA;
+using TP_LPPA.Utils;
 
 namespace TP_LPPA.Controllers
 {

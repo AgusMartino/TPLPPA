@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using TP_LPPA.Models.LPPA;
 
 namespace TP_LPPA.Utils
@@ -21,7 +19,7 @@ namespace TP_LPPA.Utils
         public List<Usuario> GetFromDB()
         {
             using (var db = new LPPAEntities())
-            { 
+            {
                 return db.Usuario.ToList();
             }
         }
