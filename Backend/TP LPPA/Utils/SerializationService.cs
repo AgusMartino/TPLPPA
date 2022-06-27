@@ -25,7 +25,7 @@ namespace SL.Services
                 {
                     Directory.CreateDirectory(Path.GetDirectoryName(pPath));
 
-                    if(!File.Exists(pPath)) File.WriteAllText(pPath, null);
+                    if (!File.Exists(pPath)) File.WriteAllText(pPath, null);
 
                     return new FileStream(pPath, pModo, pAcceso);
                 }
@@ -192,7 +192,7 @@ namespace SL.Services
                 }
                 catch (Exception ex)
                 {
-                   //ex.Handle(typeof(SerializationService));
+                    //ex.Handle(typeof(SerializationService));
                     throw;
                 }
             }
@@ -204,7 +204,7 @@ namespace SL.Services
                 }
                 catch (Exception ex)
                 {
-                   //ex.Handle(typeof(SerializationService));
+                    //ex.Handle(typeof(SerializationService));
                     throw;
                 }
             }
@@ -220,7 +220,7 @@ namespace SL.Services
                 }
                 catch (Exception ex)
                 {
-                   //ex.Handle(typeof(SerializationService));
+                    //ex.Handle(typeof(SerializationService));
                     throw;
                 }
             }
@@ -248,7 +248,7 @@ namespace SL.Services
                 }
                 catch (Exception ex)
                 {
-                   //ex.Handle(typeof(SerializationService));
+                    //ex.Handle(typeof(SerializationService));
                     throw;
                 }
             }
@@ -260,7 +260,7 @@ namespace SL.Services
                 }
                 catch (Exception ex)
                 {
-                   //ex.Handle(typeof(SerializationService));
+                    //ex.Handle(typeof(SerializationService));
                     throw;
                 }
             }

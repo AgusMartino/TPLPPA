@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Results;
-using Newtonsoft.Json;
 using TP_LPPA.Utils;
-using TP_LPPA.Models.LPPA;
 
 namespace TP_LPPA.Controllers
 {
@@ -30,12 +24,12 @@ namespace TP_LPPA.Controllers
         {
             try
             {
-                return Ok(new Persona() { Nombre = "Pablo", Edad = random.Next(18,60) });
+                return Ok(new Persona() { Nombre = "Pablo", Edad = random.Next(18, 60) });
             }
             catch (Exception ex)
             {
                 return InternalServerError(ex);
-            } 
+            }
         }
         [HttpGet]
         public IHttpActionResult GetFiltered(string filtro)
