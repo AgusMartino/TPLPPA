@@ -515,11 +515,25 @@
             <param name="id">ID de permiso</param>
             <returns></returns>
         </member>
+        <member name="M:TP_LPPA.Controllers.TokenController.RefreshToken(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="id">ID del token</param>
+            <returns></returns>
+        </member>
         <member name="M:TP_LPPA.Controllers.UserController.Login(TP_LPPA.Entities.LoginBody)">
             <summary>
             Si existe el usuario, se logea en el sistema generando un token.
             </summary>
             <param name="login">Username y Password</param>
+            <returns>Usuario y Token</returns>
+        </member>
+        <member name="M:TP_LPPA.Controllers.UserController.Logout(System.String)">
+            <summary>
+            Elimina cualquier token perteneciente al usuario
+            </summary>
+            <param name="username">Usuario</param>
             <returns>Usuario y Token</returns>
         </member>
         <member name="M:TP_LPPA.Controllers.UserController.SignUp(TP_LPPA.Models.LPPA.Usuario)">

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using TP_LPPA.Models.LPPA;
+using TP_LPPA.Entities;
+using TP_LPPA.Contracts;
+using System;
 
 namespace TP_LPPA.Utils
 {

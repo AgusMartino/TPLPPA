@@ -40,13 +40,18 @@ namespace TP_LPPA.Controllers
             }
         }
 
+        /// <summary>
+        /// Elimina cualquier token perteneciente al usuario
+        /// </summary>
+        /// <param name="username">Usuario</param>
+        /// <returns>Usuario y Token</returns>
         [HttpDelete]
         [AllowAnonymous]
-        public IHttpActionResult Logout([FromBody] Usuario user)
+        public IHttpActionResult Logout([FromBody] string username)
         {
             try
             {
-                UserManager.Current.SignUp(user);
+                UserManager.Current.Logout(username);
                 return Ok();
             }
             catch (Exception ex)

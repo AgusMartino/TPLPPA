@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
 using TP_LPPA.Models.LPPA;
+using TP_LPPA.Entities;
+using TP_LPPA.Contracts;
+using System;
 
 namespace TP_LPPA.Utils
 {
-    public class UserManager
+    public class UserManager : IGenericCRUD<Usuario>
     {
         #region Singleton
         private readonly static UserManager _instance;
@@ -15,16 +18,20 @@ namespace TP_LPPA.Utils
         }
         #endregion
 
-        public (Usuario user, Token token) Login(string username, string password)
+        public LoginResponse Login(string username, string password)
         {
-            return (new Usuario(), new Token());
+            return new LoginResponse() { user = new Usuario(), token = new Token()};
+        }
+
+        public void Logout(string username)
+        {
         }
 
         public void SignUp(Usuario user)
         {
         }
 
-        public Usuario GetOne(string username)
+        public Usuario GetOne(Guid id)
         {
             return new Usuario();
         }
@@ -46,7 +53,7 @@ namespace TP_LPPA.Utils
         {
         }
 
-        public void Remove(string username)
+        public void Remove(Guid id)
         {
         }
 

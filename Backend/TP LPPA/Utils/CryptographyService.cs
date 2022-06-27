@@ -1,4 +1,8 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using TP_LPPA.Models.LPPA;
+using TP_LPPA.Entities;
+using TP_LPPA.Contracts;
+using System;
 using System.Security.Cryptography;
 using System.Text;
 

@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TP_LPPA.Models.LPPA;
+using TP_LPPA.Entities;
+using TP_LPPA.Contracts;
+using System;
 
 namespace TP_LPPA.Utils
 {
-    public class TokenManager
+    public class TokenManager : IGenericCRUD<Token>
     {
         #region Singleton
         private readonly static TokenManager _instance;
