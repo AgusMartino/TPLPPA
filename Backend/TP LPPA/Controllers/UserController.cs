@@ -84,14 +84,14 @@ namespace TP_LPPA.Controllers
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="username">Username</param>
+        /// <param name="id">ID del usuario</param>
         /// <returns>Usuario</returns>
         [HttpGet]
-        public IHttpActionResult GetOne([FromBody] string username)
+        public IHttpActionResult GetOne([FromBody] Guid id)
         {
             try
             {
-                return Ok(UserManager.Current.GetOne(username));
+                return Ok(UserManager.Current.GetOne(id));
             }
             catch (Exception ex)
             {
@@ -157,14 +157,14 @@ namespace TP_LPPA.Controllers
         /// <summary>
         /// Establece al usuario solicitado estado 0 (inactivo).
         /// </summary>
-        /// <param name="username">Username</param>
+        /// <param name="id">ID del usuario</param>
         /// <returns></returns>
         [HttpDelete]
-        public IHttpActionResult Remove([FromBody] string username)
+        public IHttpActionResult Remove([FromBody] Guid id)
         {
             try //update estado 0
             {
-                UserManager.Current.Remove(username);
+                UserManager.Current.Remove(id);
                 return Ok();
             }
             catch (Exception ex)

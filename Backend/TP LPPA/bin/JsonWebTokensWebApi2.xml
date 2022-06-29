@@ -543,11 +543,11 @@
             <param name="user">Usuario</param>
             <returns></returns>
         </member>
-        <member name="M:TP_LPPA.Controllers.UserController.GetOne(System.String)">
+        <member name="M:TP_LPPA.Controllers.UserController.GetOne(System.Guid)">
             <summary>
             
             </summary>
-            <param name="username">Username</param>
+            <param name="id">ID del usuario</param>
             <returns>Usuario</returns>
         </member>
         <member name="M:TP_LPPA.Controllers.UserController.GetAll">
@@ -570,11 +570,11 @@
             <param name="user">Usuario</param>
             <returns></returns>
         </member>
-        <member name="M:TP_LPPA.Controllers.UserController.Remove(System.String)">
+        <member name="M:TP_LPPA.Controllers.UserController.Remove(System.Guid)">
             <summary>
             Establece al usuario solicitado estado 0 (inactivo).
             </summary>
-            <param name="username">Username</param>
+            <param name="id">ID del usuario</param>
             <returns></returns>
         </member>
         <member name="M:TP_LPPA.Controllers.UserController.GetPermissions(System.String)">

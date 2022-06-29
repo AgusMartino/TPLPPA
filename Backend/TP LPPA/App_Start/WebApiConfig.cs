@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace TP_LPPA
 {
@@ -7,8 +8,10 @@ namespace TP_LPPA
         //NUEVO RUTEO POR NOMBRE
         public static void Register(HttpConfiguration config)
         {
-
             // Configuración y servicios de Web API
+
+            //Configuración de Cors (acceso desde otros dominios)
+            EnableCors(config);
 
             // Rutas de Web API
             config.MapHttpAttributeRoutes();
@@ -25,6 +28,16 @@ namespace TP_LPPA
                 routeTemplate: "{controller}/{action}/{id}",
                 defaults: new { action = "Get", id = RouteParameter.Optional }
             );
+        }
+        private static void EnableCors(HttpConfiguration config)
+        {
+            //Para todos los dominios
+            var corsAttr = new EnableCorsAttribute("*", "*", "*");
+
+            //Para localhost
+            //var corsAttr = new EnableCorsAttribute("localhost", "*", "*");
+
+            config.EnableCors(corsAttr);
         }
     }
 }

@@ -403,3 +403,6 @@ C:\Users\ezeka\Desktop\Materias\LPPA\TP Final\TPLPPA\Backend\TP LPPA\obj\Debug\T
 C:\Users\ezeka\Desktop\Materias\LPPA\TP Final\TPLPPA\Backend\TP LPPA\obj\Debug\TP LPPA.csproj.CopyComplete
 C:\Users\ezeka\Desktop\Materias\LPPA\TP Final\TPLPPA\Backend\TP LPPA\obj\Debug\TP LPPA.dll
 C:\Users\ezeka\Desktop\Materias\LPPA\TP Final\TPLPPA\Backend\TP LPPA\obj\Debug\TP LPPA.pdb
+D:\Proyectos\Estudio\UAI\Materias\LPPA\TP Final\TPLPPA\Backend\TP LPPA\bin\System.Web.Cors.dll
+D:\Proyectos\Estudio\UAI\Materias\LPPA\TP Final\TPLPPA\Backend\TP LPPA\bin\System.Web.Http.Cors.dll
+D:\Proyectos\Estudio\UAI\Materias\LPPA\TP Final\TPLPPA\Backend\TP LPPA\bin\System.Web.Http.Cors.xml

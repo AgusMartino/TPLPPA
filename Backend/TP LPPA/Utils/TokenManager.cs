@@ -22,5 +22,29 @@ namespace TP_LPPA.Utils
         {
             
         }
+        public Token GetOne(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Token> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Add(Token obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Token obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove(Guid id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
