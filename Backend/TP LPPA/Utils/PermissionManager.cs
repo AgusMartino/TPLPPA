@@ -20,12 +20,32 @@ namespace TP_LPPA.Utils
 
         public Permiso GetOne(Guid id)
         {
-            return new Permiso();
+            return new Permiso()
+            {
+                Id_permiso = id,
+                Permiso1 = "pase de temporada"
+            };
         }
 
         public List<Permiso> GetAll()
         {
-            return new List<Permiso>();
+            return new List<Permiso>() 
+            {
+                new Permiso()
+                {
+                    Id_permiso = Guid.NewGuid(),
+                    Permiso1 = "veterano de las malvinas"
+                },
+                new Permiso()
+                {
+                    Id_permiso = Guid.NewGuid(),
+                    Permiso1 = "mujer empoderada"
+                },new Permiso()
+                {
+                    Id_permiso = Guid.NewGuid(),
+                    Permiso1 = "pase de temporada"
+                }
+            };
         }
 
         public void Add(Permiso permission)

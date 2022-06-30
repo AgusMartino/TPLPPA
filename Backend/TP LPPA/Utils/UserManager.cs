@@ -20,7 +20,27 @@ namespace TP_LPPA.Utils
 
         public LoginResponse Login(string username, string password)
         {
-            return new LoginResponse() { user = new Usuario(), token = new Token()};
+            Guid id_usuario = Guid.NewGuid();
+            return new LoginResponse() {
+                user = new Usuario()
+                {
+                    Id_usuario = id_usuario,
+                    Nombre_Usuario = username,
+                    Email = $"{username}98@gmail.com",
+                    Contraseña = password,
+                    DNI = "40772334",
+                    IdPregunta = Guid.NewGuid(),
+                    Respuesta = "el perro del vecino",
+                    Salt = Guid.NewGuid().ToString()
+                },
+                token = new Token()
+                {
+                    Id_token = Guid.NewGuid(),
+                    Id_usuario = id_usuario,
+                    Token1 = CryptographyService.RandomString(20),
+                    Expiracion = DateTime.Now.AddMinutes(10)
+                }
+            };
         }
 
         public void Logout(string username)
@@ -33,15 +53,45 @@ namespace TP_LPPA.Utils
 
         public Usuario GetOne(Guid id)
         {
-            return new Usuario();
+            return new Usuario()
+            {
+                Id_usuario = id,
+                Nombre_Usuario = "Pablo",
+                Email = "pablito95@hotmail.com.ar",
+                Contraseña = "pablitoclavounclavito",
+                DNI = "38992113",
+                IdPregunta = Guid.NewGuid(),
+                Respuesta = "tu vieja",
+                Salt = Guid.NewGuid().ToString()
+            };
         }
 
         public List<Usuario> GetAll()
         {
             return new List<Usuario>()
             {
-                new Usuario(){ Nombre_Usuario = "Usuario 1"},
                 new Usuario()
+                {
+                    Id_usuario = Guid.NewGuid(),
+                    Nombre_Usuario = "Pablo",
+                    Email = "pablito95@hotmail.com.ar",
+                    Contraseña = "pablitoclavounclavito",
+                    DNI = "38992113",
+                    IdPregunta = Guid.NewGuid(),
+                    Respuesta = "tu vieja",
+                    Salt = Guid.NewGuid().ToString()
+                },
+                new Usuario()
+                {
+                    Id_usuario = Guid.NewGuid(),
+                    Nombre_Usuario = "Anita",
+                    Email = "anita89@gmail.com",
+                    Contraseña = "anitalavalatina",
+                    DNI = "26854123",
+                    IdPregunta = Guid.NewGuid(),
+                    Respuesta = "puto el que lee",
+                    Salt = Guid.NewGuid().ToString()
+                }
             };
         }
 
@@ -59,7 +109,19 @@ namespace TP_LPPA.Utils
 
         public List<Permiso> GetPermissions(string username)
         {
-            return new List<Permiso>();
+            return new List<Permiso>() 
+            { 
+                new Permiso()
+                {
+                    Id_permiso = Guid.NewGuid(),
+                    Permiso1 = "veterano de las malvinas"
+                },
+                new Permiso()
+                {
+                    Id_permiso = Guid.NewGuid(),
+                    Permiso1 = "mujer empoderada"
+                }
+            };
         }
 
         public void UpdatePermissions(string username, List<Permiso> permissions)
