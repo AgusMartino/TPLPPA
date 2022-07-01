@@ -517,9 +517,9 @@
         </member>
         <member name="M:TP_LPPA.Controllers.TokenController.RefreshToken(System.Guid)">
             <summary>
-            
+            Si hay token, refresca la fecha de expiración del token del usuario correspondiente, si no existe, lo crea
             </summary>
-            <param name="id">ID del token</param>
+            <param name="id_user">ID del usuario</param>
             <returns></returns>
         </member>
         <member name="M:TP_LPPA.Controllers.UserController.Login(TP_LPPA.Entities.LoginBody)">

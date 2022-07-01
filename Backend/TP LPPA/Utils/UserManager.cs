@@ -3,6 +3,8 @@ using TP_LPPA.Models.LPPA;
 using TP_LPPA.Entities;
 using TP_LPPA.Contracts;
 using System;
+using System.Linq;
+using TP_LPPA.Entities.Exceptions;
 
 namespace TP_LPPA.Utils
 {
@@ -20,7 +22,22 @@ namespace TP_LPPA.Utils
 
         public LoginResponse Login(string username, string password)
         {
-            Guid id_usuario = Guid.NewGuid();
+            using(var db = new LPPAEntities())
+            {
+                var usuario = db.Usuario.Where(x =>
+                    x.Nombre_Usuario == username &&
+                    x.Contraseña == password).ToList().FirstOrDefault();
+
+                if (usuario == null) throw new NotFoundException();
+
+                var token = TokenManager.Current.RefreshToken(usuario.Id_usuario);
+
+                return new LoginResponse() { 
+                    user = usuario, 
+                    token = token };
+            }
+
+            /*Guid id_usuario = Guid.NewGuid();
             return new LoginResponse() {
                 user = new Usuario()
                 {
@@ -40,11 +57,22 @@ namespace TP_LPPA.Utils
                     Token1 = CryptographyService.RandomString(20),
                     Expiracion = DateTime.Now.AddMinutes(10)
                 }
-            };
+            };*/
         }
 
         public void Logout(string username)
         {
+            var usuario = GetAll().Where(x => 
+                x.Nombre_Usuario == username).ToList().FirstOrDefault();
+
+            if (usuario == null) throw new NotFoundException();
+
+            var token = TokenManager.Current.GetAll().Where(x =>
+                x.Id_usuario == usuario.Id_usuario).FirstOrDefault();
+
+            if (token == null) throw new NotFoundException();
+
+            TokenManager.Current.Remove(token.Id_token);
         }
 
         public void SignUp(Usuario user)

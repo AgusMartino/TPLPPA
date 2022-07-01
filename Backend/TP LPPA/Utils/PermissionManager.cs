@@ -3,6 +3,7 @@ using TP_LPPA.Models.LPPA;
 using TP_LPPA.Entities;
 using TP_LPPA.Contracts;
 using System;
+using TP_LPPA.Entities.Exceptions;
 
 namespace TP_LPPA.Utils
 {

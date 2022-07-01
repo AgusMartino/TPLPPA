@@ -4,6 +4,7 @@ using System.Web.Http;
 using TP_LPPA.Entities;
 using TP_LPPA.Models.LPPA;
 using TP_LPPA.Utils;
+using TP_LPPA.Entities.Exceptions;
 
 namespace TP_LPPA.Controllers
 {
@@ -21,16 +22,16 @@ namespace TP_LPPA.Controllers
         #endregion
 
         /// <summary>
-        /// 
+        /// Si hay token, refresca la fecha de expiración del token del usuario correspondiente, si no existe, lo crea
         /// </summary>
-        /// <param name="id">ID del token</param>
+        /// <param name="id_user">ID del usuario</param>
         /// <returns></returns>
         [HttpPut]
-        public IHttpActionResult RefreshToken([FromBody] Guid id)
+        public IHttpActionResult RefreshToken([FromBody] Guid id_user)
         {
             try
             {
-                TokenManager.Current.RefreshToken(id);
+                TokenManager.Current.RefreshToken(id_user);
                 return Ok();
             }
             catch (Exception ex)
@@ -38,6 +39,5 @@ namespace TP_LPPA.Controllers
                 return InternalServerError(ex);
             }
         }
-
     }
 }

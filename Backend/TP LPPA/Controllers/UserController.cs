@@ -4,6 +4,7 @@ using System.Web.Http;
 using TP_LPPA.Entities;
 using TP_LPPA.Models.LPPA;
 using TP_LPPA.Utils;
+using TP_LPPA.Entities.Exceptions;
 
 namespace TP_LPPA.Controllers
 {
@@ -34,6 +35,10 @@ namespace TP_LPPA.Controllers
                 var response = UserManager.Current.Login(login.username, login.password);
                 return Ok(response);
             }
+            catch(NotFoundException)
+            {
+                return NotFound();
+            }
             catch (Exception ex)
             {
                 return InternalServerError(ex);
@@ -53,6 +58,10 @@ namespace TP_LPPA.Controllers
             {
                 UserManager.Current.Logout(username);
                 return Ok();
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
             }
             catch (Exception ex)
             {

@@ -2,6 +2,7 @@
 using System.Web.Http;
 using TP_LPPA.Models.LPPA;
 using TP_LPPA.Utils;
+using TP_LPPA.Entities.Exceptions;
 
 namespace TP_LPPA.Controllers
 {
