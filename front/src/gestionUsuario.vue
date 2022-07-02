@@ -33,7 +33,7 @@ import dataTable from "./components/dataTableUser.vue"
 export default{
     components:{
         NAV,
-        dataTable
+        dataTable,
     },
     data(){
         return{
@@ -50,14 +50,6 @@ export default{
         }
     }
 }
-$(document).ready(function(){
-  $("#myInput").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myTable tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-});
 </script>
 
 <style>
