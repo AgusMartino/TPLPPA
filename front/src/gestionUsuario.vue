@@ -8,18 +8,20 @@
         
         <button type="button" class="btn btn-secondary">Registrar un nuevo usuario</button>
 
+        <input class="form-control" id="myInput" type="text" placeholder="Buscar usuario">
+
         <table class="table">
             <tr>
                 <th scope="col">Usuario</th>
                 <th scope="col">Email</th>
-                <th scope="col">Asignar permisos</th>
                 <th scope="col">Modificar</th>
-                <th scope="col">Eliminar</th>
             </tr>
-            <dataTable v-for="user in entradasJSON"
-                :Usuario="user.Usuario"
-                :Email="user.Email"
-            />
+            <tbody id="myTable">
+                <dataTable v-for="user in entradasJSON"
+                    :Usuario="user.Usuario"
+                    :Email="user.Email"
+                />
+            </tbody>
         </table>
     </div>
 </div>
@@ -47,8 +49,15 @@ export default{
              ]
         }
     }
-
 }
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
 </script>
 
 <style>
