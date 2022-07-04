@@ -8,7 +8,8 @@ using TP_LPPA.Entities.Exceptions;
 
 namespace TP_LPPA.Controllers
 {
-    [Authorize]
+    //[Authorize]
+    [AllowAnonymous]
     public class UserController : ApiController
     {
         #region Singleton
@@ -83,6 +84,10 @@ namespace TP_LPPA.Controllers
                 UserManager.Current.SignUp(user);
                 return Ok();
             }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
             catch (Exception ex)
             {
                 return InternalServerError(ex);
@@ -102,6 +107,10 @@ namespace TP_LPPA.Controllers
             {
                 return Ok(UserManager.Current.GetOne(id));
             }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
             catch (Exception ex)
             {
                 return InternalServerError(ex);
@@ -118,6 +127,10 @@ namespace TP_LPPA.Controllers
             try
             {
                 return Ok(UserManager.Current.GetAll());
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
             }
             catch (Exception ex)
             {
@@ -138,6 +151,10 @@ namespace TP_LPPA.Controllers
                 UserManager.Current.Add(user);
                 return Ok();
             }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
             catch (Exception ex)
             {
                 return InternalServerError(ex);
@@ -156,6 +173,10 @@ namespace TP_LPPA.Controllers
             {
                 UserManager.Current.Update(user);
                 return Ok();
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
             }
             catch (Exception ex)
             {
@@ -176,6 +197,10 @@ namespace TP_LPPA.Controllers
                 UserManager.Current.Remove(id);
                 return Ok();
             }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
             catch (Exception ex)
             {
                 return InternalServerError(ex);
@@ -193,6 +218,10 @@ namespace TP_LPPA.Controllers
             try
             {
                 return Ok(UserManager.Current.GetPermissions(username));
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
             }
             catch (Exception ex)
             {
@@ -212,6 +241,10 @@ namespace TP_LPPA.Controllers
             {
                 UserManager.Current.UpdatePermissions(userdata.Username, userdata.Permissions);
                 return Ok();
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
             }
             catch (Exception ex)
             {

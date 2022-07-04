@@ -18,5 +18,6 @@ namespace TP_LPPA.Models.LPPA
         public System.Guid Id_usuario { get; set; }
         public string Token1 { get; set; }
         public Nullable<System.DateTime> Expiracion { get; set; }
+        public string Salt { get; set; }
     }
 }

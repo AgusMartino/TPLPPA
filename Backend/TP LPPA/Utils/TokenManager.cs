@@ -48,27 +48,56 @@ namespace TP_LPPA.Utils
         }
         public Token GetOne(Guid id)
         {
-            throw new NotImplementedException();
-        }
+            using (var db = new LPPAEntities())
+            {
+                var obj = db.Token.ToList().Where(x => x.Id_token == id).FirstOrDefault();
 
+                if (obj == null) throw new NotFoundException();
+                else return obj;
+            }
+        }
         public List<Token> GetAll()
         {
-            throw new NotImplementedException();
+            using (var db = new LPPAEntities())
+            {
+                return db.Token.ToList();
+            }
         }
-
         public void Add(Token obj)
         {
-            throw new NotImplementedException();
+            using (var db = new LPPAEntities())
+            {
+                db.Token.Add(obj);
+                db.SaveChanges();
+            }
         }
-
         public void Update(Token obj)
         {
-            throw new NotImplementedException();
-        }
+            using (var db = new LPPAEntities())
+            {
+                var db_obj = db.Token.SingleOrDefault(b => b.Id_token == obj.Id_token);
 
+                if (db_obj != null)
+                {
+                    db.Entry(db_obj).CurrentValues.SetValues(obj);
+                    db.SaveChanges();
+                }
+                else throw new NotFoundException();
+            }
+        }
         public void Remove(Guid id)
         {
-            throw new NotImplementedException();
+            using (var db = new LPPAEntities())
+            {
+                var db_obj = db.Token.SingleOrDefault(b => b.Id_token == id);
+
+                if (db_obj != null)
+                {
+                    db.Token.Remove(db_obj);
+                    db.SaveChanges();
+                }
+                else throw new NotFoundException();
+            }
         }
     }
 }

@@ -8,7 +8,8 @@ using TP_LPPA.Entities.Exceptions;
 
 namespace TP_LPPA.Controllers
 {
-    [Authorize]
+    //[Authorize]
+    [AllowAnonymous]
     public class TokenController : ApiController
     {
         #region Singleton
@@ -33,6 +34,10 @@ namespace TP_LPPA.Controllers
             {
                 TokenManager.Current.RefreshToken(id_user);
                 return Ok();
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
             }
             catch (Exception ex)
             {

@@ -6,6 +6,7 @@
     </Key>
     <Property Name="Id_permiso" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Permiso" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Estado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Pregunta_seguridad">
     <Key>
@@ -22,6 +23,7 @@
     <Property Name="Id_usuario" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Token" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="Expiracion" Type="datetime" />
+    <Property Name="Salt" Type="varchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="Usuario">
     <Key>
@@ -35,6 +37,7 @@
     <Property Name="DNI" Type="varchar" MaxLength="20" />
     <Property Name="Contraseña" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Salt" Type="varchar" MaxLength="100" />
+    <Property Name="Estado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Usuario_Permiso">
     <Key>

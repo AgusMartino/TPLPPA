@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using TP_LPPA.Models.LPPA;
-using TP_LPPA.Entities;
-using TP_LPPA.Contracts;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using TP_LPPA.Contracts;
+using TP_LPPA.Entities;
 using TP_LPPA.Entities.Exceptions;
+using TP_LPPA.Models.LPPA;
 
 namespace TP_LPPA.Utils
 {
@@ -59,7 +59,6 @@ namespace TP_LPPA.Utils
                 }
             };*/
         }
-
         public void Logout(string username)
         {
             var usuario = GetAll().Where(x => 
@@ -74,67 +73,56 @@ namespace TP_LPPA.Utils
 
             TokenManager.Current.Remove(token.Id_token);
         }
-
+        [Obsolete]
         public void SignUp(Usuario user)
         {
         }
-
         public Usuario GetOne(Guid id)
         {
-            return new Usuario()
+            using (var db = new LPPAEntities())
             {
-                Id_usuario = id,
-                Nombre_Usuario = "Pablo",
-                Email = "pablito95@hotmail.com.ar",
-                Contraseña = "pablitoclavounclavito",
-                DNI = "38992113",
-                IdPregunta = Guid.NewGuid(),
-                Respuesta = "tu vieja",
-                Salt = Guid.NewGuid().ToString()
-            };
-        }
+                var obj = db.Usuario.ToList().Where(x => x.Id_usuario == id).FirstOrDefault();
 
+                if(obj == null) throw new NotFoundException();
+                else return obj;
+            }
+        }
         public List<Usuario> GetAll()
         {
-            return new List<Usuario>()
+            using (var db = new LPPAEntities())
             {
-                new Usuario()
+                return db.Usuario.ToList();
+            }
+        }
+        public void Add(Usuario obj)
+        {
+            using (var db = new LPPAEntities())
+            {
+                db.Usuario.Add(obj);
+                db.SaveChanges();
+            }
+        }
+        public void Update(Usuario obj)
+        {
+            using (var db = new LPPAEntities())
+            {
+                var db_obj = db.Usuario.SingleOrDefault(b => b.Id_usuario == obj.Id_usuario);
+
+                if (db_obj != null)
                 {
-                    Id_usuario = Guid.NewGuid(),
-                    Nombre_Usuario = "Pablo",
-                    Email = "pablito95@hotmail.com.ar",
-                    Contraseña = "pablitoclavounclavito",
-                    DNI = "38992113",
-                    IdPregunta = Guid.NewGuid(),
-                    Respuesta = "tu vieja",
-                    Salt = Guid.NewGuid().ToString()
-                },
-                new Usuario()
-                {
-                    Id_usuario = Guid.NewGuid(),
-                    Nombre_Usuario = "Anita",
-                    Email = "anita89@gmail.com",
-                    Contraseña = "anitalavalatina",
-                    DNI = "26854123",
-                    IdPregunta = Guid.NewGuid(),
-                    Respuesta = "puto el que lee",
-                    Salt = Guid.NewGuid().ToString()
+                    db.Entry(db_obj).CurrentValues.SetValues(obj);
+                    db.SaveChanges();
                 }
-            };
+                else throw new NotFoundException();
+            }
         }
-
-        public void Add(Usuario user)
-        {
-        }
-
-        public void Update(Usuario user)
-        {
-        }
-
         public void Remove(Guid id)
         {
+            var obj_db = GetOne(id);
+            obj_db.Estado = false;
+            Update(obj_db);
         }
-
+        [Obsolete]
         public List<Permiso> GetPermissions(string username)
         {
             return new List<Permiso>() 
@@ -151,7 +139,7 @@ namespace TP_LPPA.Utils
                 }
             };
         }
-
+        [Obsolete]
         public void UpdatePermissions(string username, List<Permiso> permissions)
         {
         }

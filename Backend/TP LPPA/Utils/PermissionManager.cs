@@ -4,6 +4,7 @@ using TP_LPPA.Entities;
 using TP_LPPA.Contracts;
 using System;
 using TP_LPPA.Entities.Exceptions;
+using System.Linq;
 
 namespace TP_LPPA.Utils
 {
@@ -21,44 +22,48 @@ namespace TP_LPPA.Utils
 
         public Permiso GetOne(Guid id)
         {
-            return new Permiso()
+            using (var db = new LPPAEntities())
             {
-                Id_permiso = id,
-                Permiso1 = "pase de temporada"
-            };
-        }
+                var obj = db.Permiso.ToList().Where(x => x.Id_permiso == id).FirstOrDefault();
 
+                if (obj == null) throw new NotFoundException();
+                else return obj;
+            }
+        }
         public List<Permiso> GetAll()
         {
-            return new List<Permiso>() 
+            using (var db = new LPPAEntities())
             {
-                new Permiso()
+                return db.Permiso.ToList();
+            }
+        }
+        public void Add(Permiso obj)
+        {
+            using (var db = new LPPAEntities())
+            {
+                db.Permiso.Add(obj);
+                db.SaveChanges();
+            }
+        }
+        public void Update(Permiso obj)
+        {
+            using (var db = new LPPAEntities())
+            {
+                var db_obj = db.Permiso.SingleOrDefault(b => b.Id_permiso == obj.Id_permiso);
+
+                if (db_obj != null)
                 {
-                    Id_permiso = Guid.NewGuid(),
-                    Permiso1 = "veterano de las malvinas"
-                },
-                new Permiso()
-                {
-                    Id_permiso = Guid.NewGuid(),
-                    Permiso1 = "mujer empoderada"
-                },new Permiso()
-                {
-                    Id_permiso = Guid.NewGuid(),
-                    Permiso1 = "pase de temporada"
+                    db.Entry(db_obj).CurrentValues.SetValues(obj);
+                    db.SaveChanges();
                 }
-            };
+                else throw new NotFoundException();
+            }
         }
-
-        public void Add(Permiso permission)
-        {
-        }
-
-        public void Update(Permiso permission)
-        {
-        }
-
         public void Remove(Guid id)
         {
+            var obj_db = GetOne(id);
+            obj_db.Estado = false;
+            Update(obj_db);
         }
     }
 }

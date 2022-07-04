@@ -4,13 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LPPAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="LPPAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Permiso">
           <Key>
             <PropertyRef Name="Id_permiso" />
           </Key>
           <Property Name="Id_permiso" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Permiso" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Pregunta_seguridad">
           <Key>
@@ -27,6 +28,7 @@
           <Property Name="Id_usuario" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Token" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Expiracion" Type="datetime" />
+          <Property Name="Salt" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -40,6 +42,7 @@
           <Property Name="DNI" Type="varchar" MaxLength="20" />
           <Property Name="Contraseña" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Salt" Type="varchar" MaxLength="100" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Usuario_Permiso">
           <Key>
@@ -56,8 +59,7 @@
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario_Permiso" EntityType="Self.Usuario_Permiso" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LPPAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -67,6 +69,7 @@
           </Key>
           <Property Name="Id_permiso" Type="Guid" Nullable="false" />
           <Property Name="Permiso1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Pregunta_seguridad">
           <Key>
@@ -83,6 +86,7 @@
           <Property Name="Id_usuario" Type="Guid" Nullable="false" />
           <Property Name="Token1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Expiracion" Type="DateTime" Precision="3" />
+          <Property Name="Salt" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -96,6 +100,7 @@
           <Property Name="DNI" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Contraseña" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Salt" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Usuario_Permiso">
           <Key>
@@ -121,6 +126,7 @@
           <EntitySetMapping Name="Permiso">
             <EntityTypeMapping TypeName="LPPAModel.Permiso">
               <MappingFragment StoreEntitySet="Permiso">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Id_permiso" ColumnName="Id_permiso" />
                 <ScalarProperty Name="Permiso1" ColumnName="Permiso" />
               </MappingFragment>
@@ -137,6 +143,7 @@
           <EntitySetMapping Name="Token">
             <EntityTypeMapping TypeName="LPPAModel.Token">
               <MappingFragment StoreEntitySet="Token">
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
                 <ScalarProperty Name="Id_token" ColumnName="Id_token" />
                 <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
                 <ScalarProperty Name="Token1" ColumnName="Token" />
@@ -147,6 +154,7 @@
           <EntitySetMapping Name="Usuario">
             <EntityTypeMapping TypeName="LPPAModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
                 <ScalarProperty Name="Nombre_Usuario" ColumnName="Nombre_Usuario" />
                 <ScalarProperty Name="IdPregunta" ColumnName="IdPregunta" />
