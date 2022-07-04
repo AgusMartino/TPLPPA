@@ -73,9 +73,9 @@ namespace TP_LPPA.Utils
 
             TokenManager.Current.Remove(token.Id_token);
         }
-        [Obsolete]
         public void SignUp(Usuario user)
         {
+            Add(user);
         }
         public Usuario GetOne(Guid id)
         {

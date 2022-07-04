@@ -35,6 +35,10 @@ namespace TP_LPPA.Utils
                 return BitConverter.ToString(sha256.ComputeHash(Encoding.UTF8.GetBytes(text))).Replace("-", "");
             }
         }
+        public static string GetSalt()
+        {
+            return Guid.NewGuid().ToString();
+        }
 
         public enum AllowedChars
         {

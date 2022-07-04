@@ -27,7 +27,7 @@ namespace TP_LPPA.Controllers
         /// </summary>
         /// <param name="id_user">ID del usuario</param>
         /// <returns></returns>
-        [HttpPut]
+        [HttpPost]
         public IHttpActionResult RefreshToken([FromBody] Guid id_user)
         {
             try
