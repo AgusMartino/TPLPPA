@@ -1,5 +1,6 @@
 <template>
 <div class="container">
+    <h4>Datos personales:</h4>
     <div class="row mt-3">
         <label for="userName">
             <span>Nombre de Usuario:</span>
@@ -18,6 +19,8 @@
             <input type="text" name="documentNumber" id="documentNumber">
         </label>
     </div>
+    <hr>
+    <h4>Seguridad de Usuario:</h4>
     <div class="row mt-3">
         <label for="question">
             <span>Pregunta de seguridad:</span>
@@ -52,9 +55,6 @@
             <span>Repetir Respuesta:</span>
             <input type="password" name="passwordCheck" id="passwordCheck">
         </label>
-    </div>
-    <div class="row mt-3">
-        <button type="submit" class="btn btn-secondary">Registrar Usuario</button>
     </div>
 </div>
 </template>

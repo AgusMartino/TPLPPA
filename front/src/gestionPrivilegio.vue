@@ -4,10 +4,16 @@
 </div>
 <div class="container">
     <div class="col">
-        <h3>Listado de privilegios existentes</h3>
-        
-        <button type="button" class="btn btn-secondary">Registrar un nuevo privilegio</button>
-
+        <h3>Registro de nuevo Privilegio</h3>
+        <label for="userName">
+            <span>Nombre de privilegio nuevo:</span>
+            <input type="text" name="userName" id="userName">
+        </label>
+        <button type="button" class="btn btn-secondary">Registrar nuevo privilegio</button>
+    </div>
+    <div class="col mt-5">
+        <hr>
+        <h3>Registro de nuevo Privilegio</h3>
         <table class="table">
             <tr>
                 <th scope="col">#</th>
@@ -60,5 +66,11 @@ export default{
     align-items: center;
     padding-right: 20%;
     padding-left: 20%
+}
+span{
+    margin-right: 5px
+}
+label{
+    margin-right: 5px
 }
 </style>

@@ -22,5 +22,6 @@ namespace TP_LPPA.Models.LPPA
         public string DNI { get; set; }
         public string Contraseña { get; set; }
         public string Salt { get; set; }
+        public bool Estado { get; set; }
     }
 }

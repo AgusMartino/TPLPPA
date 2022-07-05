@@ -49,6 +49,9 @@ a{
     text-decoration:none;
     color:black
 }
+span{
+    margin-right: 5px
+}
 </style>
 
 <script>

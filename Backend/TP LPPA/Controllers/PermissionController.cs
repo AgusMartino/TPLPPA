@@ -6,7 +6,8 @@ using TP_LPPA.Entities.Exceptions;
 
 namespace TP_LPPA.Controllers
 {
-    [Authorize]
+    //[Authorize]
+    [AllowAnonymous]
     public class PermissionController : ApiController
     {
         #region Singleton
@@ -31,6 +32,10 @@ namespace TP_LPPA.Controllers
             {
                 return Ok(PermissionManager.Current.GetOne(id));
             }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
             catch (Exception ex)
             {
                 return InternalServerError(ex);
@@ -47,6 +52,10 @@ namespace TP_LPPA.Controllers
             try
             {
                 return Ok(PermissionManager.Current.GetAll());
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
             }
             catch (Exception ex)
             {
@@ -67,6 +76,10 @@ namespace TP_LPPA.Controllers
                 PermissionManager.Current.Add(permission);
                 return Ok();
             }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
             catch (Exception ex)
             {
                 return InternalServerError(ex);
@@ -86,6 +99,10 @@ namespace TP_LPPA.Controllers
                 PermissionManager.Current.Update(permission);
                 return Ok();
             }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
             catch (Exception ex)
             {
                 return InternalServerError(ex);
@@ -104,6 +121,10 @@ namespace TP_LPPA.Controllers
             {
                 PermissionManager.Current.Remove(id);
                 return Ok();
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
             }
             catch (Exception ex)
             {

@@ -6,6 +6,7 @@
     </Key>
     <Property Name="Id_permiso" Type="Guid" Nullable="false" />
     <Property Name="Permiso1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Estado" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="Pregunta_seguridad">
     <Key>
@@ -22,6 +23,7 @@
     <Property Name="Id_usuario" Type="Guid" Nullable="false" />
     <Property Name="Token1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Expiracion" Type="DateTime" Precision="3" />
+    <Property Name="Salt" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Usuario">
     <Key>
@@ -35,6 +37,7 @@
     <Property Name="DNI" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="Contraseña" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Salt" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Estado" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="Usuario_Permiso">
     <Key>

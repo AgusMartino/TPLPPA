@@ -16,5 +16,6 @@ namespace TP_LPPA.Models.LPPA
     {
         public System.Guid Id_permiso { get; set; }
         public string Permiso1 { get; set; }
+        public bool Estado { get; set; }
     }
 }

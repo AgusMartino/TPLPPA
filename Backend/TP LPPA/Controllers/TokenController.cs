@@ -8,7 +8,8 @@ using TP_LPPA.Entities.Exceptions;
 
 namespace TP_LPPA.Controllers
 {
-    [Authorize]
+    //[Authorize]
+    [AllowAnonymous]
     public class TokenController : ApiController
     {
         #region Singleton
@@ -26,13 +27,17 @@ namespace TP_LPPA.Controllers
         /// </summary>
         /// <param name="id_user">ID del usuario</param>
         /// <returns></returns>
-        [HttpPut]
+        [HttpPost]
         public IHttpActionResult RefreshToken([FromBody] Guid id_user)
         {
             try
             {
                 TokenManager.Current.RefreshToken(id_user);
                 return Ok();
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
             }
             catch (Exception ex)
             {

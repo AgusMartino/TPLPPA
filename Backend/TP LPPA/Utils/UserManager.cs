@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using TP_LPPA.Models.LPPA;
-using TP_LPPA.Entities;
-using TP_LPPA.Contracts;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using TP_LPPA.Contracts;
+using TP_LPPA.Entities;
 using TP_LPPA.Entities.Exceptions;
+using TP_LPPA.Models.LPPA;
 
 namespace TP_LPPA.Utils
 {
@@ -59,7 +59,6 @@ namespace TP_LPPA.Utils
                 }
             };*/
         }
-
         public void Logout(string username)
         {
             var usuario = GetAll().Where(x => 
@@ -74,86 +73,113 @@ namespace TP_LPPA.Utils
 
             TokenManager.Current.Remove(token.Id_token);
         }
-
         public void SignUp(Usuario user)
         {
+            Add(user);
         }
-
         public Usuario GetOne(Guid id)
         {
-            return new Usuario()
+            using (var db = new LPPAEntities())
             {
-                Id_usuario = id,
-                Nombre_Usuario = "Pablo",
-                Email = "pablito95@hotmail.com.ar",
-                Contraseña = "pablitoclavounclavito",
-                DNI = "38992113",
-                IdPregunta = Guid.NewGuid(),
-                Respuesta = "tu vieja",
-                Salt = Guid.NewGuid().ToString()
-            };
-        }
+                var obj = db.Usuario.ToList().Where(x => x.Id_usuario == id).FirstOrDefault();
 
+                if(obj == null) throw new NotFoundException();
+                else return obj;
+            }
+        }
         public List<Usuario> GetAll()
         {
-            return new List<Usuario>()
+            using (var db = new LPPAEntities())
             {
-                new Usuario()
+                return db.Usuario.ToList();
+            }
+        }
+        public void Add(Usuario obj)
+        {
+            using (var db = new LPPAEntities())
+            {
+                var coincidencias = GetAll().Where(x => x.Nombre_Usuario == obj.Nombre_Usuario);
+
+                if(coincidencias.Count() == 0)
                 {
-                    Id_usuario = Guid.NewGuid(),
-                    Nombre_Usuario = "Pablo",
-                    Email = "pablito95@hotmail.com.ar",
-                    Contraseña = "pablitoclavounclavito",
-                    DNI = "38992113",
-                    IdPregunta = Guid.NewGuid(),
-                    Respuesta = "tu vieja",
-                    Salt = Guid.NewGuid().ToString()
-                },
-                new Usuario()
-                {
-                    Id_usuario = Guid.NewGuid(),
-                    Nombre_Usuario = "Anita",
-                    Email = "anita89@gmail.com",
-                    Contraseña = "anitalavalatina",
-                    DNI = "26854123",
-                    IdPregunta = Guid.NewGuid(),
-                    Respuesta = "puto el que lee",
-                    Salt = Guid.NewGuid().ToString()
+                    db.Usuario.Add(obj);
+                    db.SaveChanges();
                 }
-            };
+                else throw new AlreadyExistsException();
+            }
         }
-
-        public void Add(Usuario user)
+        public void Update(Usuario obj)
         {
-        }
+            using (var db = new LPPAEntities())
+            {
+                var db_obj = db.Usuario.SingleOrDefault(b => b.Id_usuario == obj.Id_usuario);
 
-        public void Update(Usuario user)
-        {
-        }
+                if (db_obj != null)
+                {
+                    if(db_obj.Nombre_Usuario != obj.Nombre_Usuario)
+                    {
+                        var coincidencias = GetAll().Where(x => x.Nombre_Usuario == obj.Nombre_Usuario);
 
+                        if (coincidencias.Count() > 0) throw new AlreadyExistsException();
+                    }
+
+                    db.Entry(db_obj).CurrentValues.SetValues(obj);
+                    db.SaveChanges();
+                }
+                else throw new NotFoundException();
+            }
+        }
         public void Remove(Guid id)
         {
+            var obj_db = GetOne(id);
+            obj_db.Estado = false;
+            Update(obj_db);
         }
-
         public List<Permiso> GetPermissions(string username)
         {
-            return new List<Permiso>() 
-            { 
-                new Permiso()
-                {
-                    Id_permiso = Guid.NewGuid(),
-                    Permiso1 = "veterano de las malvinas"
-                },
-                new Permiso()
-                {
-                    Id_permiso = Guid.NewGuid(),
-                    Permiso1 = "mujer empoderada"
-                }
-            };
-        }
+            var user = GetAll().Where(x=>x.Nombre_Usuario == username).FirstOrDefault();
 
+            if (user == null) throw new NotFoundException();
+
+            using (var db = new LPPAEntities())
+            {
+                var userPermissions = db.Usuario_Permiso.Where(x=>x.Id_usuario == user.Id_usuario).ToList();
+                var ids = userPermissions.Select(x => x.Id_permiso);
+
+                var permissions = PermissionManager.Current.GetAll()
+                    .Where(x=>ids.Contains(x.Id_permiso)).ToList();
+
+                return permissions;
+            }
+        }
         public void UpdatePermissions(string username, List<Permiso> permissions)
         {
+            var user = GetAll().Where(x => x.Nombre_Usuario == username).FirstOrDefault();
+
+            if (user == null) throw new NotFoundException();
+
+            var db_permissions = GetPermissions(username);
+
+            db_permissions.ForEach(x => PermissionManager.Current.Remove(x.Id_permiso));
+
+            using (var db = new LPPAEntities())
+            {
+                permissions.ForEach(x => 
+                { 
+                    PermissionManager.Current.Add(x);
+                
+                    db.Usuario_Permiso.Add(
+                        new Usuario_Permiso() 
+                        { 
+                            Id_usuario = user.Id_usuario, 
+                            Id_permiso = x.Id_permiso
+                        });
+                });
+
+                db.SaveChanges();
+            }
+
+
         }
     }
 }
