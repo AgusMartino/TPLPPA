@@ -64,6 +64,16 @@ namespace TP_LPPA.Utils
             var obj_db = GetOne(id);
             obj_db.Estado = false;
             Update(obj_db);
+
+            //Elimino relacion de usuario_permiso
+            using (var db = new LPPAEntities())
+            {
+                var db_relaciones = db.Usuario_Permiso.Where(b => b.Id_permiso == id).ToList();
+
+                db_relaciones.ForEach(x=> db.Usuario_Permiso.Remove(x));
+
+                db.SaveChanges();
+            }
         }
     }
 }

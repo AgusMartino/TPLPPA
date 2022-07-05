@@ -98,8 +98,14 @@ namespace TP_LPPA.Utils
         {
             using (var db = new LPPAEntities())
             {
-                db.Usuario.Add(obj);
-                db.SaveChanges();
+                var coincidencias = GetAll().Where(x => x.Nombre_Usuario == obj.Nombre_Usuario);
+
+                if(coincidencias.Count() == 0)
+                {
+                    db.Usuario.Add(obj);
+                    db.SaveChanges();
+                }
+                else throw new AlreadyExistsException();
             }
         }
         public void Update(Usuario obj)
@@ -110,6 +116,13 @@ namespace TP_LPPA.Utils
 
                 if (db_obj != null)
                 {
+                    if(db_obj.Nombre_Usuario != obj.Nombre_Usuario)
+                    {
+                        var coincidencias = GetAll().Where(x => x.Nombre_Usuario == obj.Nombre_Usuario);
+
+                        if (coincidencias.Count() > 0) throw new AlreadyExistsException();
+                    }
+
                     db.Entry(db_obj).CurrentValues.SetValues(obj);
                     db.SaveChanges();
                 }
@@ -122,26 +135,51 @@ namespace TP_LPPA.Utils
             obj_db.Estado = false;
             Update(obj_db);
         }
-        [Obsolete]
         public List<Permiso> GetPermissions(string username)
         {
-            return new List<Permiso>() 
-            { 
-                new Permiso()
-                {
-                    Id_permiso = Guid.NewGuid(),
-                    Permiso1 = "veterano de las malvinas"
-                },
-                new Permiso()
-                {
-                    Id_permiso = Guid.NewGuid(),
-                    Permiso1 = "mujer empoderada"
-                }
-            };
+            var user = GetAll().Where(x=>x.Nombre_Usuario == username).FirstOrDefault();
+
+            if (user == null) throw new NotFoundException();
+
+            using (var db = new LPPAEntities())
+            {
+                var userPermissions = db.Usuario_Permiso.Where(x=>x.Id_usuario == user.Id_usuario).ToList();
+                var ids = userPermissions.Select(x => x.Id_permiso);
+
+                var permissions = PermissionManager.Current.GetAll()
+                    .Where(x=>ids.Contains(x.Id_permiso)).ToList();
+
+                return permissions;
+            }
         }
-        [Obsolete]
         public void UpdatePermissions(string username, List<Permiso> permissions)
         {
+            var user = GetAll().Where(x => x.Nombre_Usuario == username).FirstOrDefault();
+
+            if (user == null) throw new NotFoundException();
+
+            var db_permissions = GetPermissions(username);
+
+            db_permissions.ForEach(x => PermissionManager.Current.Remove(x.Id_permiso));
+
+            using (var db = new LPPAEntities())
+            {
+                permissions.ForEach(x => 
+                { 
+                    PermissionManager.Current.Add(x);
+                
+                    db.Usuario_Permiso.Add(
+                        new Usuario_Permiso() 
+                        { 
+                            Id_usuario = user.Id_usuario, 
+                            Id_permiso = x.Id_permiso
+                        });
+                });
+
+                db.SaveChanges();
+            }
+
+
         }
     }
 }
