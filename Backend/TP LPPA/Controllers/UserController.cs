@@ -230,11 +230,11 @@ namespace TP_LPPA.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Eliminará las relaciones de los permisos viejos del usuario respectivo y le relacionará los nuevos
         /// </summary>
         /// <param name="userdata">Username y permisos de un usuario</param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpPost]
         public IHttpActionResult UpdatePermissions([FromBody] UserPermissionsBody userdata)
         {
             try

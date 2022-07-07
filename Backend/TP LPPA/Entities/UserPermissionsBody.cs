@@ -9,6 +9,6 @@ namespace TP_LPPA.Entities
     public class UserPermissionsBody
     {
         public string Username { get; set; }
-        public List<Permiso> Permissions { get; set; }
+        public List<Guid> Permissions { get; set; }
     }
 }

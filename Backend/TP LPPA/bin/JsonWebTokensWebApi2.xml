@@ -586,7 +586,7 @@
         </member>
         <member name="M:TP_LPPA.Controllers.UserController.UpdatePermissions(TP_LPPA.Entities.UserPermissionsBody)">
             <summary>
-            
+            Eliminará las relaciones de los permisos viejos del usuario respectivo y le relacionará los nuevos
             </summary>
             <param name="userdata">Username y permisos de un usuario</param>
             <returns></returns>

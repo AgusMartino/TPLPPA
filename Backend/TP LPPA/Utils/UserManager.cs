@@ -152,7 +152,7 @@ namespace TP_LPPA.Utils
                 return permissions;
             }
         }
-        public void UpdatePermissions(string username, List<Permiso> permissions)
+        public void UpdatePermissions(string username, List<Guid> permissions)
         {
             var user = GetAll().Where(x => x.Nombre_Usuario == username).FirstOrDefault();
 
@@ -160,26 +160,26 @@ namespace TP_LPPA.Utils
 
             var db_permissions = GetPermissions(username);
 
-            db_permissions.ForEach(x => PermissionManager.Current.Remove(x.Id_permiso));
-
             using (var db = new LPPAEntities())
             {
+                db_permissions.ForEach(x => 
+                {
+                    var obj_db = db.Usuario_Permiso.Where(y=> y.Id_permiso == x.Id_permiso).First();
+                    db.Usuario_Permiso.Remove(obj_db);
+                });
+
                 permissions.ForEach(x => 
                 { 
-                    PermissionManager.Current.Add(x);
-                
                     db.Usuario_Permiso.Add(
                         new Usuario_Permiso() 
                         { 
                             Id_usuario = user.Id_usuario, 
-                            Id_permiso = x.Id_permiso
+                            Id_permiso = x
                         });
                 });
 
                 db.SaveChanges();
             }
-
-
         }
     }
 }
