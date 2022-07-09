@@ -1,7 +1,4 @@
 <template>
-  <div>
-    <NAV />
-  </div>
   <div class="container">
     <div class="col">
       <h3>Listado de usuarios existentes</h3>

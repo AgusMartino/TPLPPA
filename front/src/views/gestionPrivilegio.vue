@@ -1,43 +1,43 @@
 <template>
-<div>
-    <NAV/>
-</div>
 <div class="container">
     <div class="col">
-        <userRegister/>
+        <h3>Registro de nuevo Privilegio</h3>
+        <label for="userName">
+            <span>Nombre de privilegio nuevo:</span>
+            <input type="text" name="userName" id="userName">
+        </label>
+        <router-link to="/userRegister" type="button" class="btn btn-secondary">Registrar nuevo privilegio</router-link>
+    </div>
+    <div class="col mt-5">
         <hr>
-        <h4>Privilegios del usuario</h4>
+        <h3>Registro de nuevo Privilegio</h3>
         <table class="table">
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Privilegio</th>
-                <th scope="col">Asignar</th>
+                <th scope="col">Modificar</th>
+                <th scope="col">Eliminar</th>
             </tr>
-            <tablaPrivilegios v-for="privilegio in privilegios"
+            <dataTable v-for="privilegio in entradasJSON"
                 :id="privilegio.id"
                 :privilegio="privilegio.privilegio"
             />
         </table>
-        <div class="row mt-3">
-        <button type="submit" class="btn btn-secondary">Registrar Usuario</button>
-    </div>
     </div>
 </div>
 </template>
 
 <script>
 import NAV from "./components/nav.vue"
-import userRegister from "./components/userRegister.vue"
-import tablaPrivilegios from "./components/dataPrivilegeRegister.vue"
+import dataTable from "./components/dataTablePrivilege.vue"
 export default{
     components:{
         NAV,
-        userRegister,
-        tablaPrivilegios
+        dataTable
     },
     data(){
         return{
-            privilegios:[
+             entradasJSON: [
                 {
                     id: "1",
                     privilegio: "Usuario"
@@ -46,11 +46,13 @@ export default{
                     id: "2",
                     privilegio: "Permiso"
                 }
-            ]
+             ]
         }
     }
+
 }
 </script>
+
 <style>
 .container{
     justify-content: center;
@@ -59,7 +61,13 @@ export default{
 .col{
     justify-content: center;
     align-items: center;
-    padding-right: 30%;
-    padding-left: 30%
+    padding-right: 20%;
+    padding-left: 20%
+}
+span{
+    margin-right: 5px
+}
+label{
+    margin-right: 5px
 }
 </style>

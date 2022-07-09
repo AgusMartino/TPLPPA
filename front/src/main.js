@@ -1,8 +1,21 @@
-import { createApp } from 'vue'
+import Vue from 'vue'
 import App from './index.vue'
+import vueRouter from 'vue-router'
+import Routes from './router' 
 
-import 'bootstrap/dist/css/bootstrap.css'
+Vue.use(vueRouter);
 
-createApp(App).mount('#app')
+const rutas = new vueRouter({
+	routes: Routes
+})
 
-import 'bootstrap/dist/js/bootstrap.js'
+new Vue({
+  el: '#app',
+  render: h => h(App),
+  router: rutas
+})
+
+
+
+
+

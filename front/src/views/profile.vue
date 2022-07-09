@@ -1,7 +1,4 @@
 <template>
-<div>
-    <NAV/>
-</div>
 <div class="container">
     <div class="col" v-for="user in profileJSON">
     <h3>Datos del usuario:</h3>

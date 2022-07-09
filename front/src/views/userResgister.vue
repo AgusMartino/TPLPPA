@@ -1,46 +1,40 @@
 <template>
-<div>
-    <NAV/>
-</div>
 <div class="container">
     <div class="col">
-        <h3>Registro de nuevo Privilegio</h3>
-        <label for="userName">
-            <span>Nombre de privilegio nuevo:</span>
-            <input type="text" name="userName" id="userName">
-        </label>
-        <button type="button" class="btn btn-secondary">Registrar nuevo privilegio</button>
-    </div>
-    <div class="col mt-5">
+        <userRegister/>
         <hr>
-        <h3>Registro de nuevo Privilegio</h3>
+        <h4>Privilegios del usuario</h4>
         <table class="table">
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Privilegio</th>
-                <th scope="col">Modificar</th>
-                <th scope="col">Eliminar</th>
+                <th scope="col">Asignar</th>
             </tr>
-            <dataTable v-for="privilegio in entradasJSON"
+            <tablaPrivilegios v-for="privilegio in privilegios"
                 :id="privilegio.id"
                 :privilegio="privilegio.privilegio"
             />
         </table>
+        <div class="row mt-3">
+        <button type="submit" class="btn btn-secondary">Registrar Usuario</button>
+    </div>
     </div>
 </div>
 </template>
 
 <script>
 import NAV from "./components/nav.vue"
-import dataTable from "./components/dataTablePrivilege.vue"
+import userRegister from "./components/userRegister.vue"
+import tablaPrivilegios from "./components/dataPrivilegeRegister.vue"
 export default{
     components:{
         NAV,
-        dataTable
+        userRegister,
+        tablaPrivilegios
     },
     data(){
         return{
-             entradasJSON: [
+            privilegios:[
                 {
                     id: "1",
                     privilegio: "Usuario"
@@ -49,13 +43,11 @@ export default{
                     id: "2",
                     privilegio: "Permiso"
                 }
-             ]
+            ]
         }
     }
-
 }
 </script>
-
 <style>
 .container{
     justify-content: center;
@@ -64,13 +56,7 @@ export default{
 .col{
     justify-content: center;
     align-items: center;
-    padding-right: 20%;
-    padding-left: 20%
-}
-span{
-    margin-right: 5px
-}
-label{
-    margin-right: 5px
+    padding-right: 30%;
+    padding-left: 30%
 }
 </style>
