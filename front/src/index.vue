@@ -1,33 +1,25 @@
 <template>
-<div>
-    <NAV/>
-</div>
-<div class="container">
-    <div class="col">
-        <login/>
-    </div>
-</div>
 </template>
 
 <script>
-import NAV from "./components/navInicio.vue"
-import login from "./components/login.vue"
+import login from "./login.vue"
+import resetPassword from "./resetPassword.vue"
+import menuPrincipal from "./menuPrincipal.vue"
+import gestionPrivilegio from "./gestionPrivilegio.vue"
+import gestionUsuario from "./gestionUsuario.vue"
+import userRegister from "./userRegister.vue"
+import profile from "./profile.vue"
 export default{
     components:{
-        NAV,
-        login
+        login,
+        resetPassword,
+        menuPrincipal,
+        gestionPrivilegio,
+        gestionUsuario,
+        userRegister,
+        profile
     }
 }
 </script>
 <style>
-.container{
-    justify-content: center;
-    align-items: center;
-}
-.col{
-    justify-content: center;
-    align-items: center;
-    padding-right: 30%;
-    padding-left: 30%
-}
 </style>
