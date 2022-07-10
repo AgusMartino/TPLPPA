@@ -28,8 +28,8 @@
 </template>
 
 <script>
-import NAV from "./components/nav.vue"
-import dataTable from "./components/dataTablePrivilege.vue"
+import NAV from "../components/nav.vue"
+import dataTable from "../components/dataTablePrivilege.vue"
 export default{
     components:{
         NAV,
@@ -39,11 +39,11 @@ export default{
         return{
              entradasJSON: [
                 {
-                    id: "1",
+                    id: 1,
                     privilegio: "Usuario"
                 },
                 {
-                    id: "2",
+                    id: 2,
                     privilegio: "Permiso"
                 }
              ]

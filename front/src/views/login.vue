@@ -7,12 +7,11 @@
 </template>
 
 <script>
-import NAV from "./components/navInicio.vue"
-import login from "./components/login.vue"
+import login from "../components/login.vue";
+
 export default{
     components:{
-        NAV,
-        login
+         login
     }
 }
 </script>

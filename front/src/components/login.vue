@@ -53,6 +53,3 @@ span{
     margin-right: 5px
 }
 </style>
-
-<script>
-</script>

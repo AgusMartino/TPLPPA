@@ -34,8 +34,8 @@
 </template>
 
 <script>
-import NAV from "./components/nav.vue"
-import dataTable from "./components/dataTableUser.vue"
+import NAV from "../components/nav.vue"
+import dataTable from "../components/dataTableUser.vue"
 export default{
     components:{
         NAV,
