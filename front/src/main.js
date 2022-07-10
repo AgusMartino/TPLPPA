@@ -2,6 +2,9 @@ import { createApp } from 'vue'
 import App from './index.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/js/bootstrap.js'
+
 const routes = [
   {
     path:'/',

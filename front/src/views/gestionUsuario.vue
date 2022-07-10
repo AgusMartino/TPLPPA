@@ -3,9 +3,9 @@
     <div class="col">
       <h3>Listado de usuarios existentes</h3>
 
-      <button type="button" class="btn btn-secondary">
+      <router-link to="/userRegister" type="button" class="btn btn-secondary">
         Registrar un nuevo usuario
-      </button>
+      </router-link>
 
       <input
         v-model="nombre"

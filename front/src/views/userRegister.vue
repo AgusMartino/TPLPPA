@@ -36,11 +36,11 @@ export default{
         return{
             privilegios:[
                 {
-                    id: "1",
+                    id: 1,
                     privilegio: "Usuario"
                 },
                 {
-                    id: "2",
+                    id: 2,
                     privilegio: "Permiso"
                 }
             ]
