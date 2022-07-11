@@ -37,12 +37,10 @@
 </style>
 
 <script>
-import NAV from "../components/nav.vue"
 import profile from "../components/userDataProfile.vue"
 import privilegies from "../components/userDataPrivilege.vue"
 export default {
     components:{
-        NAV,
         profile,
         privilegies
     },

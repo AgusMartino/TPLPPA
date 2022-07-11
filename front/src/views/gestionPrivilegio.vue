@@ -1,5 +1,11 @@
 <template>
-<div class="container">
+<div class="container" v-if="loading">
+    <div>
+        <div class="spinner-border text-light" role="status">
+    </div>
+    <h1>Cargando</h1>
+</div>
+<div class="container" v-if="!loading">
     <div class="col">
         <h3>Registro de nuevo Privilegio</h3>
         <label for="userName">
@@ -28,28 +34,37 @@
 </template>
 
 <script>
-import NAV from "../components/nav.vue"
 import dataTable from "../components/dataTablePrivilege.vue"
+import axios from "axios"
 export default{
     components:{
-        NAV,
         dataTable
     },
-    data(){
-        return{
-             entradasJSON: [
-                {
-                    id: 1,
-                    privilegio: "Usuario"
-                },
-                {
-                    id: 2,
-                    privilegio: "Permiso"
-                }
-             ]
+    data() {
+        return {
+            entradasJSON: [],
+            loading: false
+        };
+    },
+    mounted() {
+        this.getPrivilegies();
+    },
+    methods: {
+        getPrivilegies(){
+            debugger;
+            this.loading = true
+            axios.get("https://localhost:44398/Permission/GetAll")
+            .then(response=>{
+            this.entradasJSON = response.data;
+            })
+            .catch(err =>{
+            alert(err.data)
+            })
+            .finally(data =>{
+            this.loading = false
+            })
         }
-    }
-
+    },
 }
 </script>
 

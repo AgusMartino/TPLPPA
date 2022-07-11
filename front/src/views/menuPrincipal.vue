@@ -15,10 +15,8 @@
 </template>
 
 <script>
-import NAV from "../components/navInicio.vue"
 export default{
     components:{
-        NAV
     }
 }
 </script>

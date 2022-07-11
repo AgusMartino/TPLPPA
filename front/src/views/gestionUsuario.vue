@@ -34,26 +34,34 @@
 </template>
 
 <script>
-import NAV from "../components/nav.vue"
 import dataTable from "../components/dataTableUser.vue"
 export default{
     components:{
-        NAV,
         dataTable,
     },
-    data(){
-        return{
-             entradasJSON: [
-                {
-                    Usuario: "Agustin",
-                    Email: "martinoagustin4@gmail.com"
-                },
-                {
-                    Usuario: "Eze",
-                    Email: "EzeAmorosino@gmail.com"
-                }
-             ],
-             nombre: null
+    data() {
+        return {
+            entradasJSON: [],
+            loading: false
+        };
+    },
+    mounted() {
+        this.getUsers();
+    },
+    methods: {
+        getUsers(){
+            debugger;
+            this.loading = true
+            axios.get("https://localhost:44398/User/GetAll")
+            .then(response=>{
+            this.entradasJSON = response.data;
+            })
+            .catch(err =>{
+            alert(err.data)
+            })
+            .finally(data =>{
+            this.loading = false
+            })
         }
     },
     computed:{

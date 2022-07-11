@@ -23,12 +23,10 @@
 </template>
 
 <script>
-import NAV from "../components/nav.vue"
 import userRegister from "../components/userRegister.vue"
 import tablaPrivilegios from "../components/dataPrivilegeRegister.vue"
 export default{
     components:{
-        NAV,
         userRegister,
         tablaPrivilegios
     },
