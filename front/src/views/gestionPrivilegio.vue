@@ -1,7 +1,7 @@
 <template>
 <div class="container" v-if="loading">
     <div>
-        <div class="spinner-border text-light" role="status">
+        <div class="spinner-border text-light" role="status"></div>
     </div>
     <h1>Cargando</h1>
 </div>
@@ -25,8 +25,8 @@
                 <th scope="col">Eliminar</th>
             </tr>
             <dataTable v-for="privilegio in entradasJSON"
-                :id="privilegio.id"
-                :privilegio="privilegio.privilegio"
+                :id="privilegio.Id_permiso"
+                :privilegio="privilegio.Permiso1"
             />
         </table>
     </div>
