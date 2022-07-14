@@ -18,13 +18,15 @@
       <table class="table">
         <tr>
           <th scope="col">Usuario</th>
+          <th scope="col">Documento</th>
           <th scope="col">Email</th>
           <th scope="col">Modificar</th>
         </tr>
         <tbody id="myTable">
           <dataTable
             v-for="user in userfilter"
-            :Usuario="user.Usuario"
+            :Usuario="user.Nombre_Usuario"
+            :document = "user.DNI"
             :Email="user.Email"
           />
         </tbody>
@@ -35,6 +37,7 @@
 
 <script>
 import dataTable from "../components/dataTableUser.vue"
+import axios from "axios"
 export default{
     components:{
         dataTable,
@@ -42,7 +45,8 @@ export default{
     data() {
         return {
             entradasJSON: [],
-            loading: false
+            loading: false,
+            nombre: null
         };
     },
     mounted() {
@@ -70,7 +74,7 @@ export default{
                   return this.entradasJSON;
                 else
                   return this.entradasJSON.filter((data) => {
-                  return !data.Usuario.toLowerCase().indexOf((this.nombre.toLowerCase()));
+                  return !data.Nombre_Usuario.toLowerCase().indexOf((this.nombre.toLowerCase()));
                   })
         }
     }

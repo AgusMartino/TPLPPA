@@ -8,15 +8,15 @@
 <div class="container" v-if="!loading">
     <div class="col">
         <h3>Registro de nuevo Privilegio</h3>
-        <label for="userName">
+        <label for="privilegeName">
             <span>Nombre de privilegio nuevo:</span>
-            <input type="text" name="userName" id="userName">
+            <input type="text" name="privilegeName" id="privilegeName">
         </label>
-        <router-link to="/userRegister" type="button" class="btn btn-secondary">Registrar nuevo privilegio</router-link>
+        <button type="button" class="btn btn-secondary">Registrar nuevo privilegio</button>
     </div>
     <div class="col mt-5">
         <hr>
-        <h3>Registro de nuevo Privilegio</h3>
+        <h3>Listado de privilegios</h3>
         <table class="table">
             <tr>
                 <th scope="col">#</th>
@@ -69,6 +69,7 @@ export default{
 </script>
 
 <style>
+#
 .container{
     justify-content: center;
     align-items: center;
