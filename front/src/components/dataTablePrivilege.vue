@@ -2,7 +2,7 @@
         <tr>
             <td scope="row">{{id}}</td>
             <td>{{privilegio}}</td>
-            <td><button type="button" class="btn btn-outline-secondary">Modificar</button></td>
+            <td><router-link to="/modifyPrivilegio" type="button" class="btn btn-outline-secondary">Modificar</router-link></td>
             <td><button type="button" class="btn btn-outline-danger">Eliminar</button></td>
         </tr>
 </template>

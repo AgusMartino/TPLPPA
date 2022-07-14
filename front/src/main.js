@@ -27,6 +27,11 @@ const routes = [
     component: () => import('./views/gestionPrivilegio.vue')
 },
 {
+    path:'/modifyPrivilegio',
+    name:'modifyPrivilegio',
+    component: () => import('./views/modifyPrivilege.vue')
+},
+{
     path:'/gestionUsuario',
     name:'gestionUsuario',
     component: () => import('./views/gestionUsuario.vue')
@@ -35,6 +40,11 @@ const routes = [
     path:'/userRegister',
     name:'userRegister',
     component: () => import('./views/userRegister.vue')
+},
+{
+    path:'/modifyUser',
+    name:'modifyUser',
+    component: () => import('./views/modifyUser.vue')
 },
 {
     path:'/profile',

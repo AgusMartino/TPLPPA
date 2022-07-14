@@ -2,13 +2,16 @@
 <div class="container">
     <div class="row justify-content-center mt-5">
         <div class="col-3">
-            <button type="button" class="btn btn-secondary">Gestion de usuarios</button>
+            <router-link to="/gestionUsuario" type="button" class="btn btn-secondary">Gestion de usuarios</router-link>
         </div>
         <div class="col-2">
-            <button type="button" class="btn btn-secondary">Perfil</button>
+            <router-link to="/profile" type="button" class="btn btn-secondary">Perfil</router-link>
         </div>
         <div class="col-3">
-            <button type="button" class="btn btn-secondary">Gestion de privilegios</button>
+            <router-link to="/gestionPrivilegio" type="button" class="btn btn-secondary">Gestion de privilegios</router-link>
+        </div>
+        <div class="col-3">
+            <button type="button" class="btn btn-secondary">Logout</button>
         </div>
     </div>
 </div>

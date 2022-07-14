@@ -69,7 +69,6 @@ export default{
 </script>
 
 <style>
-#
 .container{
     justify-content: center;
     align-items: center;

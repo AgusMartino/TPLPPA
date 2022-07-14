@@ -3,7 +3,7 @@
             <td scope="row">{{Usuario}}</td>
             <td>{{document}}</td>
             <td>{{Email}}</td>
-            <td><button type="button" class="btn btn-outline-secondary">Modificar</button></td>
+            <td><router-link to="/modifyUser" type="button" class="btn btn-outline-secondary">Modificar</router-link></td>
         </tr>
 </template>
 
