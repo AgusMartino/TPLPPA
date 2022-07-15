@@ -8,11 +8,13 @@
 <div class="container" v-if="!loading">
     <div class="col">
         <h3>Registro de nuevo Privilegio</h3>
-        <label for="privilegeName">
-            <span>Nombre de privilegio nuevo:</span>
-            <input type="text" name="privilegeName" id="privilegeName">
-        </label>
-        <button type="button" class="btn btn-secondary">Registrar nuevo privilegio</button>
+        <form name="form" @submit.prevent="CreatePrivilege()">
+            <label for="privilegeName">
+                <span>Nombre de privilegio nuevo:</span>
+                <input type="text" name="privilegeName" id="inputPrivilegeName" v-model="newPrivilege.Permiso1">
+            </label>
+            <button type="submit" class="btn btn-secondary">Registrar nuevo privilegio</button>
+        </form>
     </div>
     <div class="col mt-5">
         <hr>
@@ -43,7 +45,11 @@ export default{
     data() {
         return {
             entradasJSON: [],
-            loading: false
+            loading: false,
+            newPrivilege: {
+                        Permiso1: "",
+                        Estado: true
+            }
         };
     },
     mounted() {
@@ -59,6 +65,21 @@ export default{
             })
             .catch(err =>{
             alert(err.data)
+            })
+            .finally(data =>{
+            this.loading = false
+            })
+        },
+        CreatePrivilege(){
+            this.loading = true
+            axios.post("https://localhost:44398/Permission/Add", this.newPrivilege)
+            .then(response=> {
+                if(response.status==200) {
+                alert('El nuevo privilegio fue ingresado correctamente');
+                }
+            })
+            .catch(err =>{
+                alert(err.data)
             })
             .finally(data =>{
             this.loading = false
