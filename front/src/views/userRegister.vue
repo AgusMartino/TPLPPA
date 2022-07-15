@@ -11,8 +11,8 @@
                 <th scope="col">Asignar</th>
             </tr>
             <tablaPrivilegios v-for="privilegio in privilegios"
-                :id="privilegio.id"
-                :privilegio="privilegio.privilegio"
+                :id="privilegio.Id_permiso"
+                :privilegio="privilegio.Permiso1"
             />
         </table>
         <div class="row mt-3">
@@ -25,6 +25,7 @@
 <script>
 import userRegister from "../components/userRegister.vue"
 import tablaPrivilegios from "../components/dataPrivilegeRegister.vue"
+import axios from "axios"
 export default{
     components:{
         userRegister,
@@ -32,18 +33,28 @@ export default{
     },
     data(){
         return{
-            privilegios:[
-                {
-                    id: 1,
-                    privilegio: "Usuario"
-                },
-                {
-                    id: 2,
-                    privilegio: "Permiso"
-                }
-            ]
+            privilegios:[]
         }
-    }
+    },
+    mounted() {
+        this.getPrivilegies();
+    },
+    methods: {
+        getPrivilegies(){
+            debugger;
+            this.loading = true
+            axios.get("https://localhost:44398/Permission/GetAll")
+            .then(response=>{
+            this.privilegios = response.data;
+            })
+            .catch(err =>{
+            alert(err.data)
+            })
+            .finally(data =>{
+            this.loading = false
+            })
+        }
+    },
 }
 </script>
 <style>

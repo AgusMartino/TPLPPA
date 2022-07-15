@@ -26,9 +26,10 @@
             <span>Pregunta de seguridad:</span>
             <select class="form-select" name="question" id="question">
             <option selected>Seleccionar</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option value="d037ef91-dfb4-4c1d-a2ae-0c7092ee06e2">¿Cuál es el nombre de tu abuelo?</option>
+            <option value="317ff8ba-096a-4a11-a258-64dd1ce65a79">¿Cuál fue tu primer auto?</option>
+            <option value="36c87109c-9fd2-4a50-bd0b-8350bcc35e47">¿Cuál es el nombre de tu gato?</option>
+            <option value="1fbf4f00-cbcb-4b47-a87c-8680511c8d4a">¿Cuál es tu color favorito?</option>
             </select>
         </label>
     </div>
