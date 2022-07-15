@@ -25,6 +25,11 @@
             <input type="text" name="documentNumber" id="documentNumber">
         </label>
     </div>
+    <div class="row mt-3">
+        <div class="col">
+            <button type="button" class="btn btn-secondary">Modificar</button>
+        </div>
+    </div>
     <hr>
 </div>
 </template>

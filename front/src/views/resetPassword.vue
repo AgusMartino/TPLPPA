@@ -55,8 +55,8 @@ export default{
     data() {
         return {
             entradasJSON: [],
-            usuario: false,
-            pregunta: false
+            usuario: true,
+            pregunta: true
         };
     }
 }
