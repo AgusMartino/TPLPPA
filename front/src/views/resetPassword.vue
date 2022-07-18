@@ -83,16 +83,21 @@ export default{
                 },     
             ],
             userName: null,
-            idUser: null,
             question: null,
             answer: null,
-            answerCheck: null,
             newPassword: null,
             passwordCheck: null,
             body:{
-                Id_usuario: '',
-                Contraseña: ''
-            }
+                Id_usuario: null,
+                Nombre_Usuario: null,
+                IdPregunta: null,
+                Respuesta: null,
+                Email: null,
+                DNI: null,
+                Contraseña: null,
+                Salt: null,
+                Estado: true
+            },
         };
     },
     mounted(){
@@ -116,8 +121,15 @@ export default{
             this.Usuarios.forEach((data) => {
                 if(data.Nombre_Usuario.toLowerCase() == this.userName.toLowerCase()){
                     this.usuarioBool = true;
-                    this.answerCheck = data.Respuesta
-                    this.idUser = data.Id_usuario
+                    this.body.Id_usuario = data.Id_usuario;
+                    this.body.Nombre_Usuario = data.Nombre_Usuario;
+                    this.body.IdPregunta = data.IdPregunta;
+                    this.body.Respuesta = data.Respuesta;
+                    this.body.Email = data.Email;
+                    this.body.DNI = data.DNI,
+                    this.body.Contraseña = data.Contraseña,
+                    this.body.Salt = data.Salt
+                    this.body.Estado = data.Estado
                     var pregunta = [];
                     this.preguntas.forEach((pregunta) =>{
                         if(data.IdPregunta == pregunta.id){
@@ -131,7 +143,7 @@ export default{
             }
         },
         validarPregunta(){
-            if(this.answerCheck.toLowerCase() == this.answer.toLowerCase()){
+            if(this.body.Respuesta.toLowerCase() == this.answer.toLowerCase()){
                 this.preguntaBool = true
             }
             else{
@@ -140,7 +152,6 @@ export default{
         },
         cambioContraseña(){
             if(this.newPassword == this.passwordCheck){
-                this.body.Id_usuario = this.idUser;
                 this.body.Contraseña = this.newPassword
                 axios.put("https://localhost:44398/User/Update", this.body)
                 .then(response=> {
