@@ -27,9 +27,10 @@ const routes = [
     component: () => import('./views/gestionPrivilegio.vue')
 },
 {
-    path:'/modifyPrivilegio',
+    path:'/modifyPrivilegio/:id',
     name:'modifyPrivilegio',
-    component: () => import('./views/modifyPrivilege.vue')
+    component: () => import('./views/modifyPrivilege.vue'),
+    props: true
 },
 {
     path:'/gestionUsuario',

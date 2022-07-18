@@ -21,22 +21,41 @@
 import axios from "axios"
 
 export default{
+    props: {
+        id: String
+        },
     components:{
     },
     data() {
         return {
             loading: false,
-            privilege: {
-                Id_permiso: "",
-                Permiso1: "",
-                Estado: true
-            }
+            privilege: {}
         };
     },
+    mounted(){
+        this.getAllPrivileges()
+    },
     methods: {
+        getAllPrivileges(){
+            this.loading = true
+            axios.get("https://localhost:44398/Permission/GetAll")
+            .then(response=>{
+            response.data.forEach((privilege) => {
+                if (privilege.Id_permiso == this.id){
+                    this.privilege = privilege
+                }
+            });
+            })
+            .catch(err =>{
+            alert(err.data)
+            })
+            .finally(data =>{
+            this.loading = false
+            })
+        },
         privilegeUpdate(){
                 this.loading = true
-                axios.post("https://localhost:44398/Permission/Update", this.privilege)
+                axios.put("https://localhost:44398/Permission/Update", this.privilege)
                 .then(response=> {
                     if(response.status==200) {
                     alert('Privilegio modificado con exito!');

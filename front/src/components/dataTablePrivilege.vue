@@ -2,7 +2,7 @@
         <tr>
             <td scope="row">{{id}}</td>
             <td>{{privilegio}}</td>
-            <td><router-link to="/modifyPrivilegio" type="button" class="btn btn-outline-secondary">Modificar</router-link></td>
+            <td><router-link :to="{name:'modifyPrivilegio', params:{id:this.id}}" type="button" class="btn btn-outline-secondary">Modificar</router-link></td>
             <td><button type="button" class="btn btn-outline-danger" v-on:click="deletePrivilege()">Eliminar</button></td>
         </tr>
 </template>
@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     deletePrivilege(){
-            axios.post("https://localhost:44398/Permission/Remove", this.id.toString())
+            axios.delete("https://localhost:44398/Permission/Remove", { params: { id: this.id } })
             .then(response=> {
                 if(response.status==200) {
                 alert('Privilegio eliminado correctamente');
