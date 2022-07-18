@@ -57,7 +57,6 @@ export default{
     },
     methods: {
         getPrivilegies(){
-            debugger;
             this.loading = true
             axios.get("https://localhost:44398/Permission/GetAll")
             .then(response=>{

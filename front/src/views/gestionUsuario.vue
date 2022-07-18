@@ -55,7 +55,6 @@ export default{
     },
     methods: {
         getUsers(){
-            debugger;
             this.loading = true
             axios.get("https://localhost:44398/User/GetAll")
             .then(response=>{

@@ -105,7 +105,6 @@ export default{
     },
     methods: {
         getUsers(){
-            debugger;
             axios.get("https://localhost:44398/User/GetAll")
             .then(response=>{
             this.Usuarios = response.data;

@@ -58,11 +58,14 @@ export default {
             privilegiesJSON:[]
         }
     },
+    mounted() {
+        this.getUsers()
+    },
     methods:{
         getUsers(){
             this.loading = true
             var id = localStorage.getItem("userid")
-            axios.get("https://localhost:44398/User/GetAll")
+            axios.get("https://localhost:44398/User/GetOne/"+id)
             .then(response=>{
             response.data.forEach((user) => {
                 if (user.Id_usuario == id){
