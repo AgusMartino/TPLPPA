@@ -87,7 +87,9 @@ export default {
             axios.get("https://localhost:44398/User/GetPermissions?username="+ username.toString())
             .then(response=>{
                 if(response.status==200) {
-                    this.privilegiesJSON = response.data
+                    this.privilegiesJSON = response.data.filter((privilege) => {
+                    return privilege.Estado != false
+                    });
                 }
             })
             .catch(err =>{
