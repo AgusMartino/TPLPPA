@@ -10,24 +10,24 @@
     <div class="row mt-3">
         <label for="userName">
             <span>Nombre de Usuario:</span>
-            <input type="text" name="userName" id="userName">
+            <input type="text" name="userName" id="userName" v-model="user.Nombre_Usuario">
         </label>
     </div>
     <div class="row mt-3">
         <label for="email">
             <span>Email:</span>
-            <input type="text" name="email" id="email">
+            <input type="text" name="email" id="email" v-model="user.Email">
         </label>
     </div>
     <div class="row mt-3">
         <label for="documentNumber">
             <span>Numero de documento:</span>
-            <input type="text" name="documentNumber" id="documentNumber">
+            <input type="text" name="documentNumber" id="documentNumber" v-model="user.DNI">
         </label>
     </div>
     <div class="row mt-3">
         <div class="col">
-            <button type="button" class="btn btn-secondary">Modificar</button>
+            <button type="button" class="btn btn-secondary" v-on:click="userUpdate()">Modificar</button>
         </div>
     </div>
     <hr>
@@ -36,13 +36,56 @@
 
 <script>
 import axios from "axios"
+
 export default{
+    props: {
+        id: String
+    },
     components:{
     },
     data() {
         return {
-            loading: false
+            loading: false,
+            user: {}
         };
+    },
+    mounted(){
+        this.getUsers()
+    },
+    methods: {
+        getUsers(){
+            this.loading = true
+            axios.get("https://localhost:44398/User/GetAll")
+            .then(response=>{
+            response.data.forEach((user) => {
+                if (user.Id_usuario == this.id){
+                    this.user = user
+                }
+            });
+            })
+            .catch(err =>{
+            alert(err.data)
+            })
+            .finally(data =>{
+            this.loading = false
+            })
+        },
+
+        userUpdate(){
+                this.loading = true
+                axios.put("https://localhost:44398/User/Update", this.user)
+                .then(response=> {
+                    if(response.status==200) {
+                    alert('Usuario modificado con exito!');
+                    }
+                })
+                .catch(err =>{
+                    alert(err.Message)
+                })
+                .finally(data =>{
+                this.loading = false
+                })
+            }
     },
 }
 </script>

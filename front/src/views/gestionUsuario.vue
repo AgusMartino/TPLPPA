@@ -28,6 +28,7 @@
             :Usuario="user.Nombre_Usuario"
             :document = "user.DNI"
             :Email="user.Email"
+            :Id="user.Id_usuario"
           />
         </tbody>
       </table>
