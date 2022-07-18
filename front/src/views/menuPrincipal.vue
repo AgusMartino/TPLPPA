@@ -11,15 +11,33 @@
             <router-link to="/gestionPrivilegio" type="button" class="btn btn-secondary">Gestion de privilegios</router-link>
         </div>
         <div class="col-3">
-            <button type="button" class="btn btn-secondary">Logout</button>
+            <button type="button" class="btn btn-secondary" v-on:click="logout()">Logout</button>
         </div>
     </div>
 </div>
 </template>
 
 <script>
+import axios from 'axios'
+import { useRouter } from 'vue-router';
+
 export default{
     components:{
+    },
+    methods: {
+        logout(){
+                    axios.delete("https://localhost:44398/User/Logout", { params: { username: localStorage.getItem("username") } })
+                    .then(response=> {
+                        if(response.status==200) {
+                        alert('Hasta la proxima!');
+                        localStorage.clear()
+                        this.$router.replace("/")
+                        }
+                    })
+                    .catch(err =>{
+                        alert(err.data)
+                    })
+        }
     }
 }
 </script>

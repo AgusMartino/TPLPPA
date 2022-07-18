@@ -51,6 +51,9 @@ export default{
                 .then(response=> {
                     if(response.status==200) {
                     alert('Bienvenido!');
+                    localStorage.setItem("username", response.data.user.Nombre_Usuario)
+                    localStorage.setItem("userid", response.data.user.Id_usuario)
+                    this.$router.push("/menuPrincipal")
                     }
                 })
                 .catch(err =>{

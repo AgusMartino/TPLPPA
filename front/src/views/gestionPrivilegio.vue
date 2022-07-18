@@ -61,7 +61,9 @@ export default{
             this.loading = true
             axios.get("https://localhost:44398/Permission/GetAll")
             .then(response=>{
-            this.entradasJSON = response.data;
+            this.entradasJSON = response.data.filter((privilege) => {
+                return privilege.Estado != false
+            });
             })
             .catch(err =>{
             alert(err.data)
