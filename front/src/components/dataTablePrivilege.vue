@@ -25,6 +25,7 @@ export default {
             .then(response=> {
                 if(response.status==200) {
                 alert('Privilegio eliminado correctamente');
+                this.$router.go()
                 }
             })
             .catch(err =>{

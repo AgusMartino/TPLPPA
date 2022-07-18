@@ -2,18 +2,28 @@
     <tr>
         <td scope="row">{{id}}</td>
         <td>{{privilegio}}</td>
-        <td><input class="form-check-input" type="checkbox" value="" id="privilegeUser"></td>
+        <td><input class="form-check-input" type="checkbox" id="privilegeUser" v-model="checkedPrivilege" v-on:change="updatePrivilegeList()"></td>
     </tr>
 </template>
 
 <script>
 export default {
   props: {
-    id: Number,
+    id: String,
     privilegio: String
   },
   data() {
     return {
+      checkedPrivilege: false
+    }
+  },
+  methods: {
+    updatePrivilegeList(){
+      if (this.checkedPrivilege){
+        localStorage.setItem(this.id, this.id)
+      } else{
+        localStorage.removeItem(this.id)
+      }
     }
   }
 }
