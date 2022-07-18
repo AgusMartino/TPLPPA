@@ -6,12 +6,12 @@
     <h1>Cargando</h1>
 </div>
 <div class="container" v-if="!loading">
-    <div class="col" v-for="user in profileJSON">
+    <div class="col">
     <h3>Datos del usuario:</h3>
         <profile
-        :username="user.Nombre_Usuario"
-        :Email="user.Email"
-        :documentNumber="user.DNI"/>
+        :username="profileJSON.Nombre_Usuario"
+        :Email="profileJSON.Email"
+        :documentNumber="profileJSON.DNI"/>
     </div>
     <div class="col">
     <h3>Privilegios del usuario:</h3>
@@ -21,8 +21,8 @@
             <th scope="col">Privilegio</th>
         </tr>
         <privilegies v-for="privilege in privilegiesJSON"
-        :id="privilege.id"
-        :privilegio="privilege.privilegio"/>
+        :id="privilege.Id_permiso"
+        :privilegio="privilege.Permiso1"/>
     </table>
     </div>
 </div>
@@ -54,18 +54,19 @@ export default {
     data(){
         return{
             loading: false,
-            profileJSON: [],
+            profileJSON: {},
             privilegiesJSON:[]
         }
     },
     mounted() {
-        this.getUsers()
+        this.getUsers(),
+        this.getPrivileges()
     },
     methods:{
         getUsers(){
             this.loading = true
             var id = localStorage.getItem("userid")
-            axios.get("https://localhost:44398/User/GetOne/"+id)
+            axios.get("https://localhost:44398/User/GetAll")
             .then(response=>{
             response.data.forEach((user) => {
                 if (user.Id_usuario == id){
@@ -79,6 +80,23 @@ export default {
             .finally(data =>{
             this.loading = false
             })
+        },
+        getPrivileges(){
+            this.loading = true
+            var username = localStorage.getItem("username")
+            axios.get("https://localhost:44398/User/GetPermissions?username="+ username.toString())
+            .then(response=>{
+                if(response.status==200) {
+                    this.privilegiesJSON = response.data
+                }
+            })
+            .catch(err =>{
+            alert(err.data)
+            })
+            .finally(data =>{
+            this.loading = false
+            })
+            
         }
     }
 }

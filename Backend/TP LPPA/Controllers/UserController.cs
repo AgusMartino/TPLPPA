@@ -213,7 +213,7 @@ namespace TP_LPPA.Controllers
         /// <param name="username">Username</param>
         /// <returns>Permisos del usuario solicitado</returns>
         [HttpGet]
-        public IHttpActionResult GetPermissions([FromBody] string username)
+        public IHttpActionResult GetPermissions([FromUri] string username)
         {
             try
             {
