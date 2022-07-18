@@ -1,11 +1,17 @@
 <template>
-<div class="container">
+<div class="container" v-if="loading">
+    <div>
+        <div class="spinner-border text-light" role="status"></div>
+    </div>
+    <h1>Cargando</h1>
+</div>
+<div class="container" v-if="!loading">
     <div class="col" v-for="user in profileJSON">
     <h3>Datos del usuario:</h3>
         <profile
-        :username="user.Usuario"
+        :username="user.Nombre_Usuario"
         :Email="user.Email"
-        :documentNumber="user.documentNumber"/>
+        :documentNumber="user.DNI"/>
     </div>
     <div class="col">
     <h3>Privilegios del usuario:</h3>
@@ -39,6 +45,7 @@
 <script>
 import profile from "../components/userDataProfile.vue"
 import privilegies from "../components/userDataPrivilege.vue"
+import axios from "axios"
 export default {
     components:{
         profile,
@@ -46,24 +53,29 @@ export default {
     },
     data(){
         return{
-             profileJSON: [
-                {
-                    Usuario: "Agustin",
-                    Email: "martinoagustin4@gmail.com",
-                    documentNumber: 43013181
+            loading: false,
+            profileJSON: [],
+            privilegiesJSON:[]
+        }
+    },
+    methods:{
+        getUsers(){
+            this.loading = true
+            var id = localStorage.getItem("userid")
+            axios.get("https://localhost:44398/User/GetAll")
+            .then(response=>{
+            response.data.forEach((user) => {
+                if (user.Id_usuario == id){
+                    this.profileJSON = user
                 }
-             ],
-             privilegiesJSON:[
-                {
-                    id: 1,
-                    privilegio: "Usuario"
-                },
-                {
-                    id: 2,
-                    privilegio: "Permiso"
-                }
-             ]
-
+            });
+            })
+            .catch(err =>{
+            alert(err.data)
+            })
+            .finally(data =>{
+            this.loading = false
+            })
         }
     }
 }
