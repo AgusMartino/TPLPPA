@@ -53,7 +53,7 @@ namespace TP_LPPA.Controllers
         /// <returns>Usuario y Token</returns>
         [HttpDelete]
         [AllowAnonymous]
-        public IHttpActionResult Logout([FromBody] string username)
+        public IHttpActionResult Logout([FromUri] string username)
         {
             try
             {
@@ -101,7 +101,7 @@ namespace TP_LPPA.Controllers
         /// <param name="id">ID del usuario</param>
         /// <returns>Usuario</returns>
         [HttpGet]
-        public IHttpActionResult GetOne([FromBody] Guid id)
+        public IHttpActionResult GetOne([FromUri] Guid id)
         {
             try
             {
@@ -190,7 +190,7 @@ namespace TP_LPPA.Controllers
         /// <param name="id">ID del usuario</param>
         /// <returns></returns>
         [HttpDelete]
-        public IHttpActionResult Remove([FromBody] Guid id)
+        public IHttpActionResult Remove([FromUri] Guid id)
         {
             try //update estado 0
             {

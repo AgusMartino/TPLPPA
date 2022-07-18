@@ -26,7 +26,7 @@ namespace TP_LPPA.Controllers
         /// <param name="id"></param>
         /// <returns>Permiso</returns>
         [HttpGet]
-        public IHttpActionResult GetOne([FromBody] Guid id)
+        public IHttpActionResult GetOne([FromUri] Guid id)
         {
             try
             {
@@ -115,7 +115,7 @@ namespace TP_LPPA.Controllers
         /// <param name="id">ID de permiso</param>
         /// <returns></returns>
         [HttpDelete]
-        public IHttpActionResult Remove([FromBody] Guid id)
+        public IHttpActionResult Remove([FromUri] Guid id)
         {
             try
             {
